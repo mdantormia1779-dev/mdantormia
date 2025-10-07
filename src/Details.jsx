@@ -17,7 +17,7 @@ function Details() {
         <div className="flex flex-col items-center md:items-start text-center md:text-left ml-0 md:ml-12">
           <div className="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-gray-700 shadow-lg mb-2">
             <img
-              src="/antor.png"
+              src="/mdantormia/antor.png"
               alt="Md Antor Mia"
               className="w-full h-full object-cover"
             />

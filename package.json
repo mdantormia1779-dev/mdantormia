@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mdantormia1779-dev.github.io/mdantormia/",
+
   "scripts": {
     "predeploy": "npm run build && cp dist/index.html dist/404.html", 
     "deploy": "gh-pages -d dist",
