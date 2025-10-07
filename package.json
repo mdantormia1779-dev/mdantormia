@@ -1,13 +1,12 @@
 {
   "name": "my-react-app",
-  "homepage": "https://mdantormia1779-dev.github.io/mdantormia/",
-  "postbuild": "cp dist/index.html dist/404.html",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://mdantormia1779-dev.github.io/mdantormia/",
   "scripts": {
-    "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build && cp dist/index.html dist/404.html", 
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -35,9 +34,6 @@
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
-    "vite": "npm:rolldown-vite@7.1.14"
-  },
-  "overrides": {
-    "vite": "npm:rolldown-vite@7.1.14"
+    "vite": "^5.2.0"
   }
 }
