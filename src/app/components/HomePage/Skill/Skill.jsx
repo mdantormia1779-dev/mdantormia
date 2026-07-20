@@ -1,79 +1,112 @@
 "use client";
 
 import React from "react";
-import { FaCss3Alt, FaGitAlt, FaHtml5, FaJs, FaNode, FaReact } from "react-icons/fa";
+import {
+  FaCss3Alt,
+  FaGitAlt,
+  FaHtml5,
+  FaJs,
+  FaNode,
+  FaReact,
+  FaCheckCircle
+} from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { RiNextjsFill } from "react-icons/ri";
-import { SiBetterauth, SiExpress, SiFigma, SiMongodb, SiTailwindcss } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+import {
+  SiBetterauth,
+  SiExpress,
+  SiFigma,
+  SiMongodb,
+  SiTailwindcss,
+  SiRedux,
+  SiTypescript,
+  SiPrisma,
+  SiReacthookform,
+  SiShadcnui,
+  SiDaisyui,
+  SiMysql,
+  SiPython
+} from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
-import { motion } from "framer-motion"; // Framer motion import
+import { MdVerified } from "react-icons/md";
+import { motion } from "framer-motion";
 import Education from "../Education/Education";
 
+// 🎨 Color system
+const colors = {
+  blue: "text-blue-400 border-blue-500/20",
+  green: "text-green-400 border-green-500/20",
+  pink: "text-pink-400 border-pink-500/20",
+  purple: "text-purple-400 border-purple-500/20",
+  yellow: "text-yellow-400 border-yellow-500/20",
+};
+
 const Skill = () => {
-  // এনিমেশন সেটিংস
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
   return (
-    <div className="p-4 md:p-8 lg:p-8">
-      <section className="container border-b border-white/10 mx-auto py-12 md:py-20 text-white">
-        
-        {/* Title Section */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="flex items-center justify-center md:justify-start gap-3 mb-12"
-        >
-          <div className="p-2 bg-blue-500/10 rounded-lg">
-            <IoSettings className="text-2xl md:text-3xl text-blue-400 animate-spin-slow" />
+    <div className="p-4 md:p-8">
+      <section className="container mx-auto py-12 text-white border-b border-white/10">
+
+        {/* Title */}
+        <div className="flex items-center justify-center md:justify-start gap-3 mb-12">
+          <div className="p-3 bg-blue-500/10 rounded-xl">
+            <IoSettings className="text-3xl text-blue-400 animate-spin-slow" />
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold">
             My <span className="text-blue-500">Skills</span>
           </h1>
-        </motion.div>
+        </div>
 
-        {/* Skills Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-20"
-        >
-          <SkillCard title="Frontend" color="blue" variants={cardVariants}>
-            <SkillItem icon={<FaHtml5 className="text-orange-500" />} name="HTML" />
-            <SkillItem icon={<FaCss3Alt className="text-blue-500" />} name="CSS" />
-            <SkillItem icon={<FaJs className="text-yellow-400" />} name="JavaScript" />
-            <SkillItem icon={<FaReact className="text-cyan-400" />} name="React" />
-            <SkillItem icon={<RiNextjsFill className="text-white" />} name="Next.js" />
-            <SkillItem icon={<SiTailwindcss className="text-sky-400" />} name="Tailwind" />
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* Frontend */}
+          <SkillCard title="Frontend" color="blue">
+            <SkillItem icon={<FaHtml5 className="text-orange-500 icon" />} name="HTML" />
+            <SkillItem icon={<FaCss3Alt className="text-blue-500 icon" />} name="CSS" />
+            <SkillItem icon={<FaJs className="text-yellow-400 icon" />} name="JavaScript" />
+            <SkillItem icon={<FaReact className="text-cyan-400 icon" />} name="React.js" />
+            <SkillItem icon={<RiNextjsFill className="icon" />} name="Next.js" />
+            <SkillItem icon={<SiTailwindcss className="text-sky-400 icon" />} name="Tailwind CSS" />
           </SkillCard>
 
-          <SkillCard title="Backend" color="green" variants={cardVariants}>
-            <SkillItem icon={<SiMongodb className="text-green-500" />} name="MongoDB" />
-            <SkillItem icon={<SiExpress className="text-gray-200" />} name="Express.js" />
-            <SkillItem icon={<TbApi className="text-purple-400" />} name="REST API" />
-            <SkillItem icon={<FaNode className="text-green-400" />} name="Node.js (Basic)" />
-            <SkillItem icon={<SiBetterauth className="text-indigo-400" />} name="BetterAuth" />
+          {/* Backend */}
+          <SkillCard title="Backend" color="green">
+            <SkillItem icon={<FaNode className="text-green-400 icon" />} name="Node.js" />
+            <SkillItem icon={<SiExpress className="icon" />} name="Express.js" />
+            <SkillItem icon={<SiBetterauth className="text-indigo-400 icon" />} name="Better Auth" />
           </SkillCard>
 
-          <SkillCard title="Tools" color="pink" variants={cardVariants}>
-            <SkillItem icon={<FaGitAlt className="text-orange-600" />} name="Git & GitHub" />
-            <SkillItem icon={<VscVscode className="text-blue-500" />} name="VS Code" />
-            <SkillItem icon={<SiFigma className="text-pink-500" />} name="Figma Design" />
+          {/* Database */}
+          <SkillCard title="Database & Auth" color="purple">
+            <SkillItem icon={<SiMongodb className="text-green-500 icon" />} name="MongoDB" />
+            <SkillItem icon={<SiPrisma className="text-blue-400 icon" />} name="Prisma ORM" />
+            <SkillItem icon={<SiMysql className="text-blue-500 icon" />} name="SQL" />
           </SkillCard>
-        </motion.div>
 
-        <div className="mt-10">
+          {/* State */}
+          <SkillCard title="State & Validation" color="yellow">
+            <SkillItem icon={<SiRedux className="text-purple-500 icon" />} name="Redux Toolkit" />
+            <SkillItem icon={<SiReacthookform className="text-pink-500 icon" />} name="React Hook Form" />
+            <SkillItem icon={<MdVerified className="text-green-400 icon" />} name="Yup Validation" />
+          </SkillCard>
+
+          {/* Tools */}
+          <SkillCard title="Tools" color="pink">
+            <SkillItem icon={<FaGitAlt className="text-orange-600 icon" />} name="Git & GitHub" />
+            <SkillItem icon={<VscVscode className="text-blue-500 icon" />} name="VS Code" />
+            <SkillItem icon={<SiFigma className="text-pink-500 icon" />} name="Figma" />
+          </SkillCard>
+
+          {/* Languages */}
+          <SkillCard title="Languages" color="blue">
+            <SkillItem icon={<FaJs className="text-yellow-400 icon" />} name="JavaScript" />
+            <SkillItem icon={<SiTypescript className="text-blue-500 icon" />} name="TypeScript" />
+            <SkillItem icon={<SiPython className="text-yellow-300 icon" />} name="Python" />
+          </SkillCard>
+
+        </div>
+
+        <div className="mt-12">
           <Education />
         </div>
       </section>
@@ -81,30 +114,25 @@ const Skill = () => {
   );
 };
 
-// নতুন কার্ড কম্পোনেন্ট যা কোড আরও ক্লিন করবে
-const SkillCard = ({ title, color, children, variants }) => (
-  <motion.div 
-    variants={variants}
-    className={`bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 md:p-8 hover:border-${color}-500/30 transition-all duration-300 shadow-xl group`}
+// 🔥 Card
+const SkillCard = ({ title, color, children }) => (
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    className={`bg-gray-900/50 backdrop-blur-md border rounded-2xl p-6 shadow-lg transition ${colors[color]}`}
   >
-    <h2 className={`text-xl md:text-2xl font-bold mb-6 text-${color}-400 flex items-center gap-2`}>
-      <span className={`w-2 h-2 bg-${color}-500 rounded-full`}></span>
+    <h2 className={`text-xl font-bold mb-5 ${colors[color]}`}>
       {title}
     </h2>
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-4 text-gray-300">
-      {children}
-    </div>
+    <div className="space-y-3">{children}</div>
   </motion.div>
 );
 
+// ✨ Item
 const SkillItem = ({ icon, name }) => (
-  <motion.div 
-    whileHover={{ x: 5 }}
-    className="flex items-center gap-3 cursor-default"
-  >
-    <div className="text-xl md:text-2xl">{icon}</div>
-    <span className="text-sm md:text-base font-medium">{name}</span>
-  </motion.div>
+  <div className="flex items-center gap-3 hover:translate-x-1 transition">
+    {icon}
+    <span className="text-sm font-medium text-gray-300">{name}</span>
+  </div>
 );
 
 export default Skill;
