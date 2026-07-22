@@ -6,7 +6,7 @@ import { FaBriefcase } from "react-icons/fa";
 
 const Experience = () => {
   return (
-    <section className="p-4 md:p-8 lg:p-0container mx-auto py-16 text-white">
+    <section className="p-4 md:p-8 lg:p-0 container mx-auto py-16 text-white">
 
       {/* Title */}
       <div className="flex items-center gap-3 mb-12">
