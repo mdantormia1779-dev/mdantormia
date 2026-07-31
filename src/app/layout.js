@@ -17,7 +17,9 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://mdantormia.vercel.app"),
-  
+  verification: {
+    google: "ZNBz05NMgYFbEC_1mN62sfQjKVpTDZjDRVTGnQKbAg4", // কোড থেকে আপনার নির্দিষ্ট স্ট্রিংটি দিন
+  },
   title: {
     default: "Md Antor Mia - MERN Stack Developer",
     template: "%s | Md Antor Mia",
