@@ -5,12 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   FaUser,
-  FaCode,
   FaLaptopCode,
   FaRocket,
   FaGraduationCap,
   FaDownload,
-  FaHeart,
   FaCheckCircle,
 } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
@@ -21,22 +19,11 @@ const AboutPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".about-page-hero", {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
-
-      gsap.from(".about-page-card", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out",
-        delay: 0.3,
-      });
+      gsap.fromTo(
+        ".about-page-anim",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, stagger: 0.06, ease: "power2.out" }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -85,70 +72,70 @@ const AboutPage = () => {
   ];
 
   return (
-    <div ref={containerRef} className="py-16 md:py-24 text-white relative overflow-hidden">
+    <div ref={containerRef} className="py-12 md:py-20 text-white relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         
         {/* HEADER SECTION */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="about-page-hero inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div className="about-page-anim inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
             <FaUser className="text-xs" />
             Full Biography
           </div>
-          <h1 className="about-page-hero text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
+          <h1 className="about-page-anim text-3xl sm:text-5xl md:text-6xl font-black tracking-tight">
             Driven by Passion,{" "}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Powered by Code
             </span>
           </h1>
-          <p className="about-page-hero text-gray-400 text-base sm:text-lg leading-relaxed">
+          <p className="about-page-anim text-gray-400 text-sm sm:text-base leading-relaxed">
             Get to know more about my background, development philosophy, and journey as a software developer.
           </p>
         </div>
 
         {/* HERO BIO CARD */}
-        <div className="about-page-hero bg-[#0b1120]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl mb-16 relative overflow-hidden">
+        <div className="about-page-anim bg-[#0b1120]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl mb-12 relative overflow-hidden">
           <div className="grid md:grid-cols-12 gap-8 items-center">
             
             <div className="md:col-span-4 flex justify-center">
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-3xl overflow-hidden border-2 border-indigo-500/30 p-2 bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 shadow-2xl">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden border-2 border-indigo-500/30 p-2 bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 shadow-xl">
                 <div className="w-full h-full relative rounded-2xl overflow-hidden bg-[#030712]">
                   <Image
                     src="/antor.png"
                     alt="Md Antor Mia"
                     fill
                     priority
-                    sizes="(max-width: 768px) 220px, 250px"
+                    sizes="(max-width: 768px) 200px, 240px"
                     className="object-cover object-top"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="md:col-span-8 space-y-5">
+            <div className="md:col-span-8 space-y-4">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Hi, Im <span className="text-cyan-400">Md Antor Mia</span>
               </h2>
 
-              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">
                 I am a dedicated Frontend and MERN Stack Developer based in Bangladesh. My journey in web development started with curiosity and has grown into a relentless drive to craft user-centric digital experiences that solve real-world problems.
               </p>
 
-              <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-400 leading-relaxed text-xs sm:text-sm md:text-base">
                 Over the past few years, I have built numerous interactive web applications, gained hands-on industrial internship experience at JEVXO Software, and sharpened my abilities in modern full-stack workflows.
               </p>
 
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap gap-3 pt-2">
                 <a
                   href="/antor.pdf"
                   download
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 font-bold text-sm text-white shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 font-bold text-xs sm:text-sm text-white shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
                 >
                   <FaDownload /> Download Resume
                 </a>
 
                 <Link
                   href="/contact"
-                  className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-semibold text-sm text-gray-300 hover:text-white transition-all flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-semibold text-xs sm:text-sm text-gray-300 hover:text-white transition-all flex items-center gap-2"
                 >
                   <FiSend className="text-cyan-400" /> Let’s Talk
                 </Link>
@@ -159,37 +146,37 @@ const AboutPage = () => {
         </div>
 
         {/* MILESTONE CARDS */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {milestones.map((card, idx) => (
             <div
               key={idx}
-              className="about-page-card bg-[#0b1120]/60 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-3xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+              className="about-page-anim bg-[#0b1120]/60 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-3xl p-5 shadow-lg transition-all duration-200 hover:-translate-y-1 group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">
                 {card.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{card.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{card.desc}</p>
+              <h3 className="text-lg font-bold text-white mb-1.5">{card.title}</h3>
+              <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{card.desc}</p>
             </div>
           ))}
         </div>
 
         {/* CORE DEVELOPMENT PRINCIPLES */}
-        <div className="about-page-hero bg-[#0b1120]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl">
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white text-center mb-10">
+        <div className="about-page-anim bg-[#0b1120]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-white text-center mb-8">
             My Core <span className="text-indigo-400">Development Philosophy</span>
           </h3>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {principles.map((p, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/20 transition-all flex items-start gap-4"
+                className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/20 transition-all flex items-start gap-3.5"
               >
-                <FaCheckCircle className="text-indigo-400 text-xl mt-1 shrink-0" />
+                <FaCheckCircle className="text-indigo-400 text-lg mt-0.5 shrink-0" />
                 <div>
-                  <h4 className="text-base font-bold text-white mb-1">{p.title}</h4>
-                  <p className="text-sm text-gray-400 leading-relaxed">{p.desc}</p>
+                  <h4 className="text-sm sm:text-base font-bold text-white mb-0.5">{p.title}</h4>
+                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             ))}

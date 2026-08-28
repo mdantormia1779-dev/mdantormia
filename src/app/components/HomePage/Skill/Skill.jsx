@@ -21,7 +21,6 @@ import {
   SiTypescript,
   SiPrisma,
   SiReacthookform,
-  SiDaisyui,
   SiMysql,
   SiPython,
 } from "react-icons/si";
@@ -103,77 +102,71 @@ const Skill = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap.from(".skill-header", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-
-      gsap.from(".skill-category-card", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
+      gsap.fromTo(
+        ".skill-card-item",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          stagger: 0.05,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 90%",
+            once: true,
+          },
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="py-20 text-white relative">
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-20">
+    <div ref={containerRef} className="py-14 sm:py-16 text-white relative">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-16">
         
         {/* SECTION HEADER */}
-        <div className="skill-header text-center md:text-left mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-3">
+        <div className="text-center md:text-left mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-2.5">
             <FaLayerGroup className="text-xs" />
             Technical Expertise
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
             Skills & <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Tech Stack</span>
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mt-2">
+          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mt-1.5">
             A comprehensive toolbox of modern technologies I use to build scalable web products.
           </p>
         </div>
 
         {/* SKILLS CATEGORIES GRID */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="skill-category-card group bg-[#0b1120]/70 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10"
+              className="skill-card-item group bg-[#0b1120]/75 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
             >
               {/* Category Header */}
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/5">
-                <h3 className="font-bold text-base sm:text-lg text-white group-hover:text-cyan-300 transition-colors">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
+                <h3 className="font-bold text-sm sm:text-base text-white group-hover:text-cyan-300 transition-colors">
                   {category.title}
                 </h3>
-                <span className={`text-xs px-2.5 py-1 rounded-full bg-white/5 border ${category.accent}`}>
+                <span className={`text-xs px-2 py-0.5 rounded-full bg-white/5 border ${category.accent}`}>
                   {category.skills.length} Tech
                 </span>
               </div>
 
               {/* Skills List */}
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-2">
                 {category.skills.map((skill, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-200"
+                    className="flex items-center gap-2 p-2 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all duration-150"
                   >
-                    <span className="text-lg shrink-0">{skill.icon}</span>
-                    <span className="text-xs sm:text-sm font-medium text-gray-300 truncate">
+                    <span className="text-base shrink-0">{skill.icon}</span>
+                    <span className="text-xs font-medium text-gray-300 truncate">
                       {skill.name}
                     </span>
                   </div>
@@ -184,7 +177,7 @@ const Skill = () => {
         </div>
 
         {/* INTEGRATED EDUCATION COMPONENT */}
-        <div className="mt-16">
+        <div className="mt-12">
           <Education />
         </div>
 

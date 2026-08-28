@@ -1,71 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
+import React from "react";
 
 const BackgroundGlow = () => {
-  const orb1 = useRef(null);
-  const orb2 = useRef(null);
-  const orb3 = useRef(null);
-
-  useEffect(() => {
-    // Subtle GSAP floating mesh background animation
-    const ctx = gsap.context(() => {
-      gsap.to(orb1.current, {
-        x: 60,
-        y: 40,
-        scale: 1.15,
-        duration: 8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.to(orb2.current, {
-        x: -50,
-        y: -30,
-        scale: 1.2,
-        duration: 10,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 1,
-      });
-
-      gsap.to(orb3.current, {
-        x: 40,
-        y: -40,
-        scale: 1.1,
-        duration: 12,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 2,
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 bg-grid-pattern">
-      {/* Orb 1: Indigo */}
-      <div
-        ref={orb1}
-        className="absolute -top-32 -left-32 w-96 h-96 md:w-[550px] md:h-[550px] bg-indigo-600/15 rounded-full blur-[140px]"
-      />
+      {/* Top Left Glow: Indigo */}
+      <div className="absolute -top-24 -left-24 w-72 h-72 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] bg-indigo-600/10 rounded-full blur-[80px] sm:blur-[100px] transform-gpu will-change-transform" />
 
-      {/* Orb 2: Cyan */}
-      <div
-        ref={orb2}
-        className="absolute top-1/3 -right-32 w-96 h-96 md:w-[500px] md:h-[500px] bg-cyan-500/15 rounded-full blur-[130px]"
-      />
+      {/* Middle Right Glow: Cyan */}
+      <div className="absolute top-1/4 -right-24 w-72 h-72 sm:w-96 sm:h-96 md:w-[450px] md:h-[450px] bg-cyan-500/10 rounded-full blur-[80px] sm:blur-[100px] transform-gpu will-change-transform" />
 
-      {/* Orb 3: Purple */}
-      <div
-        ref={orb3}
-        className="absolute -bottom-32 left-1/4 w-96 h-96 md:w-[600px] md:h-[600px] bg-purple-600/15 rounded-full blur-[150px]"
-      />
+      {/* Bottom Center Glow: Purple */}
+      <div className="absolute -bottom-24 left-1/3 w-72 h-72 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] bg-purple-600/10 rounded-full blur-[90px] sm:blur-[110px] transform-gpu will-change-transform" />
     </div>
   );
 };

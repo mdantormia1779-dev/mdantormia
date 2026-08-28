@@ -1,57 +1,56 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { FaFolderOpen, FaSearch, FaFilter } from "react-icons/fa";
+import { FaFolderOpen, FaSearch } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import Card, { fallbackProjects } from "../components/Card.jsx/Card";
 import Link from "next/link";
 import gsap from "gsap";
 
 const ProjectPage = () => {
-  const [projectData, setProjectData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projectData, setProjectData] = useState(fallbackProjects);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const containerRef = useRef(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
+      if (!process.env.NEXT_PUBLIC_API_URL) return;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+
       try {
-        if (process.env.NEXT_PUBLIC_API_URL) {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/projects`
-          );
-          const data = await res.json();
-          if (data.success && Array.isArray(data.data)) {
-            setProjectData(data.data);
-          } else if (Array.isArray(data)) {
-            setProjectData(data);
-          }
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/projects`,
+          { signal: controller.signal }
+        );
+        clearTimeout(timeoutId);
+        const data = await res.json();
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setProjectData(data.data);
+        } else if (Array.isArray(data) && data.length > 0) {
+          setProjectData(data);
         }
-      } catch (error) {
-        console.log("Using fallback projects:", error);
-      } finally {
-        setLoading(false);
+      } catch {
+        // Silently use fallback projects
       }
     };
 
     fetchProjects();
 
     const ctx = gsap.context(() => {
-      gsap.from(".project-page-header", {
-        y: 35,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out",
-      });
+      gsap.fromTo(
+        ".project-page-header",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, stagger: 0.08, ease: "power2.out" }
+      );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
-  const rawProjects =
-    projectData.length > 0 ? projectData : fallbackProjects;
+  const rawProjects = projectData.length > 0 ? projectData : fallbackProjects;
 
   const filteredProjects = rawProjects.filter((project) => {
     const matchesCategory =
@@ -74,25 +73,25 @@ const ProjectPage = () => {
   const categories = ["All", "Full Stack", "Frontend", "Next.js"];
 
   return (
-    <div ref={containerRef} className="py-16 md:py-24 text-white min-h-screen">
+    <div ref={containerRef} className="py-12 md:py-20 text-white min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-          <div className="project-page-header inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
+          <div className="project-page-header inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
             <FaFolderOpen className="text-xs" />
             Complete Portfolio
           </div>
-          <h1 className="project-page-header text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
+          <h1 className="project-page-header text-3xl sm:text-5xl md:text-6xl font-black tracking-tight">
             All Creative <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Projects</span>
           </h1>
-          <p className="project-page-header text-gray-400 text-base sm:text-lg">
+          <p className="project-page-header text-gray-400 text-sm sm:text-base">
             Explore web applications, frontend architectures, client projects, and full-stack software.
           </p>
         </div>
 
         {/* SEARCH & FILTERS BAR */}
-        <div className="project-page-header mb-12 flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#0b1120]/80 backdrop-blur-xl border border-white/10 shadow-xl">
+        <div className="project-page-header mb-10 flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#0b1120]/80 backdrop-blur-xl border border-white/10 shadow-xl">
           
           {/* SEARCH INPUT */}
           <div className="relative w-full md:w-80">
@@ -112,9 +111,9 @@ const ProjectPage = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/25"
+                    ? "bg-indigo-500 text-white shadow-md shadow-indigo-500/25"
                     : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
                 }`}
               >
@@ -131,18 +130,18 @@ const ProjectPage = () => {
             <Card projectData={filteredProjects} category="All" />
           </div>
         ) : (
-          <div className="text-center py-20 bg-[#0b1120]/40 rounded-3xl border border-white/5 p-8">
-            <FaFolderOpen className="text-5xl text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-300 mb-2">No Projects Match Your Search</h3>
-            <p className="text-sm text-gray-500 mb-6">
-              Try searching with different keywords like &quot;React&quot;, &quot;Next.js&quot;, or reset your filters.
+          <div className="text-center py-16 bg-[#0b1120]/40 rounded-3xl border border-white/5 p-8">
+            <FaFolderOpen className="text-4xl text-gray-600 mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-gray-300 mb-1">No Projects Match Your Search</h3>
+            <p className="text-xs sm:text-sm text-gray-500 mb-5">
+              Try searching with different keywords or reset your filters.
             </p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="px-5 py-2.5 rounded-xl bg-indigo-500 text-white text-sm font-semibold"
+              className="px-4 py-2 rounded-xl bg-indigo-500 text-white text-xs sm:text-sm font-semibold"
             >
               Reset Filters
             </button>
@@ -150,17 +149,17 @@ const ProjectPage = () => {
         )}
 
         {/* CALL TO ACTION */}
-        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-indigo-900/30 via-[#0b1120] to-cyan-900/30 border border-white/10 text-center space-y-4">
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+        <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-indigo-900/30 via-[#0b1120] to-cyan-900/30 border border-white/10 text-center space-y-3">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-white">
             Have a project in mind or need a custom build?
           </h3>
-          <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto">
             Let&apos;s team up to build an exceptional digital product that delivers real value.
           </p>
           <div className="pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold shadow-xl shadow-indigo-500/25 hover:scale-105 active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition-all"
             >
               <FiSend /> Get in Touch
             </Link>

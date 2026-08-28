@@ -28,13 +28,13 @@ const Footer = () => {
     {
       name: "LinkedIn",
       icon: FaLinkedin,
-      href: "https://www.linkedin.com/in/md-antor-mia-antor/",
+      href: "www.linkedin.com/in/mdantormia",
       color: "hover:text-cyan-400 hover:border-cyan-500/40",
     },
     {
       name: "Facebook",
       icon: FaFacebook,
-      href: "https://www.facebook.com/share/17QnUSneqa/",
+      href: "https://www.facebook.com/md.antormia.1779",
       color: "hover:text-indigo-400 hover:border-indigo-500/40",
     },
   ];
