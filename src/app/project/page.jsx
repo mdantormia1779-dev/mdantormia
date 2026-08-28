@@ -3,12 +3,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaFolderOpen, FaSearch } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
-import Card, { fallbackProjects } from "../components/Card.jsx/Card";
+import Card, { fallbackProjects, sortProjectsByRecent } from "../components/Card.jsx/Card";
 import Link from "next/link";
 import gsap from "gsap";
 
 const ProjectPage = () => {
-  const [projectData, setProjectData] = useState(fallbackProjects);
+  const [projectData, setProjectData] = useState(sortProjectsByRecent(fallbackProjects));
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const containerRef = useRef(null);
@@ -28,9 +28,9 @@ const ProjectPage = () => {
         clearTimeout(timeoutId);
         const data = await res.json();
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setProjectData(data.data);
+          setProjectData(sortProjectsByRecent(data.data));
         } else if (Array.isArray(data) && data.length > 0) {
-          setProjectData(data);
+          setProjectData(sortProjectsByRecent(data));
         }
       } catch {
         // Silently use fallback projects
@@ -50,7 +50,8 @@ const ProjectPage = () => {
     return () => ctx.revert();
   }, []);
 
-  const rawProjects = projectData.length > 0 ? projectData : fallbackProjects;
+  const rawProjects =
+    projectData.length > 0 ? sortProjectsByRecent(projectData) : fallbackProjects;
 
   const filteredProjects = rawProjects.filter((project) => {
     const matchesCategory =

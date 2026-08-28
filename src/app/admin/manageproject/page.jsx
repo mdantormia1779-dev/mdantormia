@@ -8,10 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import EditProjectModal from "@/app/components/AdimDashboard/EditProjectModal/EditProjectModal";
 import DeleteProjectModal from "@/app/components/AdimDashboard/DeleteProjectModal/DeleteProjectModal";
-import { fallbackProjects } from "@/app/components/Card.jsx/Card";
+import { fallbackProjects, sortProjectsByRecent } from "@/app/components/Card.jsx/Card";
 
 const ManageProject = () => {
-  const [projects, setProjects] = useState(fallbackProjects);
+  const [projects, setProjects] = useState(sortProjectsByRecent(fallbackProjects));
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -35,9 +35,9 @@ const ManageProject = () => {
         clearTimeout(timeoutId);
         const data = await res.json();
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setProjects(data.data);
+          setProjects(sortProjectsByRecent(data.data));
         } else if (Array.isArray(data) && data.length > 0) {
-          setProjects(data);
+          setProjects(sortProjectsByRecent(data));
         }
       } catch {
         // Keep fallback projects
@@ -80,11 +80,18 @@ const ManageProject = () => {
 
     try {
       const { _id, ...rest } = editingProject;
+      const now = new Date().toISOString();
 
       const techArray =
         typeof rest.tech === "string"
           ? rest.tech.split(",").map((t) => t.trim())
           : rest.tech;
+
+      const updatedPayload = {
+        ...rest,
+        tech: techArray,
+        updatedAt: now,
+      };
 
       if (process.env.NEXT_PUBLIC_API_URL) {
         const res = await fetch(
@@ -92,22 +99,29 @@ const ManageProject = () => {
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...rest, tech: techArray }),
+            body: JSON.stringify(updatedPayload),
           }
         );
         const data = await res.json();
         if (!data.success) {
-          toast.info("Updated locally in session.");
+          toast.info("Updated in active session.");
         }
       }
 
+      // Move updated project to the VERY TOP (index 0) of the list
+      const updatedItem = {
+        ...editingProject,
+        ...updatedPayload,
+      };
+
       setProjects((prev) =>
-        prev.map((p) =>
-          p._id === _id ? { ...p, ...rest, tech: techArray } : p
-        )
+        sortProjectsByRecent([
+          updatedItem,
+          ...prev.filter((p) => p._id !== _id),
+        ])
       );
 
-      toast.success("Project updated successfully! 🚀");
+      toast.success("Project updated and moved to first position! 🚀");
       setIsEditModalOpen(false);
       setEditingProject(null);
     } catch {
@@ -174,7 +188,7 @@ const ManageProject = () => {
             Manage Projects
           </h2>
           <p className="text-xs sm:text-sm text-gray-400">
-            Edit details, update tech stacks, or remove portfolio items
+            Edit details, update tech stacks, or remove portfolio items (recently updated appear first)
           </p>
         </div>
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { FaGithub, FaExternalLinkAlt, FaFolder } from "react-icons/fa";
+import { FaGithub, FaFolder } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 
 export const fallbackProjects = [
@@ -17,6 +17,7 @@ export const fallbackProjects = [
     github: "https://github.com/mdantormia1779-dev",
     live: "https://mdantormia.vercel.app",
     featured: true,
+    updatedAt: "2026-08-28T18:00:00.000Z",
   },
   {
     _id: "p2",
@@ -29,6 +30,7 @@ export const fallbackProjects = [
     github: "https://github.com/mdantormia1779-dev",
     live: "https://mdantormia.vercel.app",
     featured: true,
+    updatedAt: "2026-08-27T12:00:00.000Z",
   },
   {
     _id: "p3",
@@ -41,6 +43,7 @@ export const fallbackProjects = [
     github: "https://github.com/mdantormia1779-dev",
     live: "https://mdantormia.vercel.app",
     featured: true,
+    updatedAt: "2026-08-26T10:00:00.000Z",
   },
   {
     _id: "p4",
@@ -53,6 +56,7 @@ export const fallbackProjects = [
     github: "https://github.com/mdantormia1779-dev",
     live: "https://mdantormia.vercel.app",
     featured: false,
+    updatedAt: "2026-08-25T08:00:00.000Z",
   },
   {
     _id: "p5",
@@ -65,14 +69,46 @@ export const fallbackProjects = [
     github: "https://github.com/mdantormia1779-dev",
     live: "https://mdantormia.vercel.app",
     featured: false,
+    updatedAt: "2026-08-24T06:00:00.000Z",
   },
 ];
 
+export const sortProjectsByRecent = (projects = []) => {
+  if (!Array.isArray(projects)) return [];
+  return [...projects].sort((a, b) => {
+    // 1. Compare updatedAt timestamp
+    const dateA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
+    const dateB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
+    if (dateA && dateB && dateA !== dateB) {
+      return dateB - dateA;
+    }
+
+    // 2. Compare createdAt timestamp
+    const createA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const createB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    if (createA && createB && createA !== createB) {
+      return createB - createA;
+    }
+
+    // 3. Fallback to MongoDB ObjectId creation time comparison (hex string)
+    if (
+      typeof a._id === "string" &&
+      typeof b._id === "string" &&
+      a._id.length === 24 &&
+      b._id.length === 24
+    ) {
+      return b._id.localeCompare(a._id);
+    }
+
+    return 0;
+  });
+};
+
 const Card = ({ projectData = [], limit, category = "All" }) => {
-  // Use provided projects or realistic fallbacks if database is empty/unconnected
+  // Always sort so updated & new projects appear FIRST
   const rawList =
     Array.isArray(projectData) && projectData.length > 0
-      ? projectData
+      ? sortProjectsByRecent(projectData)
       : fallbackProjects;
 
   const filtered =

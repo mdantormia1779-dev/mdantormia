@@ -2,20 +2,20 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { FaFolderOpen, FaArrowRight } from "react-icons/fa";
-import Card, { fallbackProjects } from "../Card.jsx/Card";
+import Card, { fallbackProjects, sortProjectsByRecent } from "../Card.jsx/Card";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Project = () => {
-  const [projectData, setProjectData] = useState(fallbackProjects);
+  const [projectData, setProjectData] = useState(sortProjectsByRecent(fallbackProjects));
   const [activeCategory, setActiveCategory] = useState("All");
   const containerRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fast background fetch with timeout
+    // Fast background fetch with timeout and sorting
     const fetchProjects = async () => {
       if (!process.env.NEXT_PUBLIC_API_URL) return;
 
@@ -30,9 +30,9 @@ const Project = () => {
         clearTimeout(timeoutId);
         const result = await response.json();
         if (result.success && Array.isArray(result.data) && result.data.length > 0) {
-          setProjectData(result.data);
+          setProjectData(sortProjectsByRecent(result.data));
         } else if (Array.isArray(result) && result.length > 0) {
-          setProjectData(result);
+          setProjectData(sortProjectsByRecent(result));
         }
       } catch {
         // Silently use fallback projects

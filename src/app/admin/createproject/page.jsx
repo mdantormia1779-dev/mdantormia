@@ -79,9 +79,12 @@ const CreateProject = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    const now = new Date().toISOString();
     const finalData = {
       ...formData,
       tech: formData.tech.split(",").map((t) => t.trim()),
+      createdAt: now,
+      updatedAt: now,
     };
 
     try {
