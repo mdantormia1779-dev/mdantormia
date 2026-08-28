@@ -3,7 +3,8 @@ import "./globals.css";
 import LayoutWrapper from "./components/LayoutWrapper/LayoutWrapper";
 import { ToastContainer } from "react-toastify";
 import VisitTracker from "./components/VisitTracker";
-
+import BackgroundGlow from "./components/shared/BackgroundGlow";
+import CustomCursor from "./components/shared/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,10 +22,10 @@ export const metadata = {
     google: "ZNBz05NMgYFbEC_1mN62sfQjKVpTDZjDRVTGnQKbAg4", // কোড থেকে আপনার নির্দিষ্ট স্ট্রিংটি দিন
   },
   title: {
-    default: "Md Antor Mia - MERN Stack Developer",
+    default: "Md Antor Mia - Frontend & MERN Stack Developer",
     template: "%s | Md Antor Mia",
   },
-  description: "Portfolio of Md Antor Mia. Specializing in modern web application development with React, Next.js, and JavaScript.",
+  description: "Portfolio of Md Antor Mia. Specializing in high-performance modern web applications with Next.js, React, and JavaScript.",
   
   keywords: [
     "Md Antor Mia",
@@ -86,11 +87,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className="dark">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#030712] text-gray-100 min-h-screen relative`}>
+        <BackgroundGlow />
+        <CustomCursor />
         <VisitTracker />
         <LayoutWrapper>{children}</LayoutWrapper>
-        <ToastContainer />
+        <ToastContainer theme="dark" position="bottom-right" autoClose={4000} />
       </body>
     </html>
   );

@@ -1,91 +1,136 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaFolderOpen, FaArrowRight } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FiLayers } from "react-icons/fi";
 import Card from "../Card.jsx/Card";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Project = () => {
   const [projectData, setProjectData] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const containerRef = useRef(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
-        const result = await response.json();
-        
-        // আপনার API রেসপন্স অনুযায়ী ডাটা সেট করা হচ্ছে
-        if (result.success) {
-          setProjectData(result.data);
-        } else {
-          setProjectData(Array.isArray(result) ? result : []);
+        if (process.env.NEXT_PUBLIC_API_URL) {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/projects`
+          );
+          const result = await response.json();
+          if (result.success && Array.isArray(result.data)) {
+            setProjectData(result.data);
+          } else if (Array.isArray(result)) {
+            setProjectData(result);
+          }
         }
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.log("Using showcase fallback projects:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProjects();
-  }, []); // [] দেয়া আছে যেন কম্পোনেন্ট মাউন্ট হওয়ার সময় একবারই কল হয়
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.2 } 
-    }
-  };
+    const ctx = gsap.context(() => {
+      gsap.from(".project-section-header", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
+      gsap.from(".project-card", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const categories = ["All", "Full Stack", "Frontend", "Next.js"];
 
   return (
-    <section className="text-white py-12 md:py-20 px-4">
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        className="container mx-auto border-b border-white/10 pb-20"
-      >
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12">
-          <motion.div variants={itemVariants} className="flex items-center gap-4 group">
-            <div className="p-3 bg-blue-500/10 rounded-xl group-hover:bg-blue-500/20 transition-colors">
-              <FaFolderOpen className="text-2xl md:text-3xl text-blue-400" />
+    <section ref={containerRef} className="py-20 text-white relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-20">
+        
+        {/* HEADER & FILTER */}
+        <div className="project-section-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
+              <FaFolderOpen className="text-xs" />
+              Featured Work
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              My <span className="text-blue-500">Projects</span>
-            </h1>
-          </motion.div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
+              Recent <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Projects</span>
+            </h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-xl mt-2">
+              A curated collection of web applications, client portals, and open-source software experiments.
+            </p>
+          </div>
 
-          <motion.div variants={itemVariants}>
+          {/* CATEGORY TABS & VIEW ALL */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                  activeCategory === cat
+                    ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/30"
+                    : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+
             <Link
               href="/project"
-              className="group flex items-center gap-2 px-6 py-3 border border-blue-400/50 text-blue-400 rounded-full font-semibold hover:bg-blue-400 hover:text-black transition-all duration-300 active:scale-95 shadow-lg shadow-blue-500/10"
+              className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs sm:text-sm font-semibold text-gray-300 hover:text-white transition-all ml-2 group"
             >
-              View All Projects
-              <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
+              <span>Explore All</span>
+              <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
             </Link>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Project Cards Grid */}
-        <motion.div variants={itemVariants} className="w-full">
-          {/* এখানে যদি ডাটা না আসে তাহলে লোডিং স্টেট বা খালি অবস্থার হ্যান্ডলিং যোগ করতে পারেন */}
-          <Card projectData={projectData} limit={3} />
-        </motion.div>
+        {/* CARDS GRID */}
+        <div className="w-full">
+          <Card projectData={projectData} limit={3} category={activeCategory} />
+        </div>
 
-        {/* Mobile-only Bottom Link */}
-        <motion.div variants={itemVariants} className="mt-10 flex justify-center sm:hidden">
-            <Link href="/project" className="text-blue-400 text-sm font-medium border-b border-blue-400/30 pb-1 hover:text-white transition-colors">
-                Explore more projects &rarr;
-            </Link>
-        </motion.div>
-      </motion.div>
+        {/* MOBILE VIEW ALL */}
+        <div className="mt-12 text-center lg:hidden">
+          <Link
+            href="/project"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-indigo-500/25"
+          >
+            <span>View All Projects</span>
+            <FaArrowRight className="text-xs" />
+          </Link>
+        </div>
+
+      </div>
     </section>
   );
 };
