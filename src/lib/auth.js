@@ -1,37 +1,14 @@
-import dns from "node:dns";
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-
 import { betterAuth } from "better-auth";
-import { MongoClient } from "mongodb";
-import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import prisma from "./prisma.js";
 
-// 🌍 global cache (Next.js dev fix)
-const globalForMongo = global;
-
-// 🔥 Mongo Client Setup
-let client;
-let clientPromise;
-
-if (!globalForMongo._mongoClientPromise) {
-  client = new MongoClient(process.env.DB_URL);
-  globalForMongo._mongoClientPromise = client.connect();
-} else {
-  client = new MongoClient(process.env.DB_URL);
-}
-
-clientPromise = globalForMongo._mongoClientPromise;
-
-// 🔥 DB Connection
-const connection = await clientPromise;
-const db = connection.db("mdantormia");
-
-// 🚀 AUTH CONFIG
+// 🚀 AUTH CONFIG WITH PRISMA & POSTGRESQL
 export const auth = betterAuth({
-  database: mongodbAdapter(db, {
-    client: connection, // ✅ always connected client
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
   }),
 
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
 
   emailAndPassword: {
     enabled: true,
@@ -39,22 +16,22 @@ export const auth = betterAuth({
 
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
 
-  // 🔥 FIX: account linking (no more account_not_linked error)
+  // 🔥 Account linking
   account: {
     accountLinking: {
       enabled: true,
     },
   },
 
-  // 🔐 security
+  // 🔐 Security
   trustedOrigins: [
     "http://localhost:3000",
     process.env.BETTER_AUTH_URL,
-  ],
-
+    process.env.NEXT_PUBLIC_APP_URL,
+  ].filter(Boolean),
 });

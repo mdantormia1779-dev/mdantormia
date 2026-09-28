@@ -128,7 +128,7 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {displayData.map((project, index) => (
         <div
-          key={project._id || index}
+          key={project.id || project._id || index}
           className="project-card group bg-[#0b1120]/75 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between"
         >
           <div>

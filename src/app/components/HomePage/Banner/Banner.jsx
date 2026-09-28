@@ -66,20 +66,12 @@ const Banner = () => {
   }, []);
 
   const handleDownload = () => {
-    // Non-blocking download trigger
     const link = document.createElement("a");
-    link.href = "/antor.pdf";
-    link.download = "Antor_CV.pdf";
+    link.href = "/api/cv/download";
+    link.setAttribute("download", "");
+    document.body.appendChild(link);
     link.click();
-
-    // Track silently in background
-    if (process.env.NEXT_PUBLIC_API_URL) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/downloads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ downloadType: "CV" }),
-      }).catch(() => {});
-    }
+    document.body.removeChild(link);
   };
 
   return (

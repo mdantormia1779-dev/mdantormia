@@ -17,14 +17,13 @@ const Project = () => {
 
     // Fast background fetch with timeout and sorting
     const fetchProjects = async () => {
-      if (!process.env.NEXT_PUBLIC_API_URL) return;
-
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/projects`,
+          `${apiUrl}/projects`,
           { signal: controller.signal }
         );
         clearTimeout(timeoutId);

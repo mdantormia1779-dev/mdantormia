@@ -38,17 +38,17 @@ const DashboardChart = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
-      if (!process.env.NEXT_PUBLIC_API_URL) return;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stats`);
+        const res = await fetch(`${apiUrl}/api/stats`);
         const result = await res.json();
 
         if (result.success) {
           setData([
-            { name: "Projects", value: result.totalProjects || 5 },
-            { name: "Site Visits", value: result.totalVisits || 248 },
-            { name: "CV Downloads", value: result.cvDownloads || 18 },
+            { name: "Projects", value: result.totalProjects ?? 5 },
+            { name: "Site Visits", value: result.totalVisits ?? 248 },
+            { name: "CV Downloads", value: result.cvDownloads ?? 18 },
           ]);
         }
       } catch {

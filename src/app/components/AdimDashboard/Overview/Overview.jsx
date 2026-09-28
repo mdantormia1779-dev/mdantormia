@@ -14,16 +14,12 @@ const Overview = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
-      if (!process.env.NEXT_PUBLIC_API_URL) {
-        setLoading(false);
-        return;
-      }
-
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
 
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stats`, {
+        const res = await fetch(`${apiUrl}/api/stats`, {
           signal: controller.signal,
         });
         clearTimeout(timeoutId);
@@ -31,9 +27,9 @@ const Overview = () => {
 
         if (data.success) {
           setStats({
-            totalProjects: data.totalProjects || 5,
-            totalVisits: data.totalVisits || 248,
-            cvDownloads: data.cvDownloads || 18,
+            totalProjects: data.totalProjects ?? 5,
+            totalVisits: data.totalVisits ?? 248,
+            cvDownloads: data.cvDownloads ?? 18,
           });
         }
       } catch {

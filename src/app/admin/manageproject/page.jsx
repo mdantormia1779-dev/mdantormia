@@ -23,13 +23,12 @@ const ManageProject = () => {
   // Fetch Projects from API
   useEffect(() => {
     const fetchProjects = async () => {
-      if (!process.env.NEXT_PUBLIC_API_URL) return;
-
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
 
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`, {
+        const res = await fetch(`${apiUrl}/projects`, {
           signal: controller.signal,
         });
         clearTimeout(timeoutId);
@@ -79,7 +78,8 @@ const ManageProject = () => {
     if (!editingProject) return;
 
     try {
-      const { _id, ...rest } = editingProject;
+      const projectId = editingProject._id || editingProject.id;
+      const { _id, id, ...rest } = editingProject;
       const now = new Date().toISOString();
 
       const techArray =
@@ -93,19 +93,18 @@ const ManageProject = () => {
         updatedAt: now,
       };
 
-      if (process.env.NEXT_PUBLIC_API_URL) {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/projects/${_id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedPayload),
-          }
-        );
-        const data = await res.json();
-        if (!data.success) {
-          toast.info("Updated in active session.");
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const res = await fetch(
+        `${apiUrl}/projects/${projectId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedPayload),
         }
+      );
+      const data = await res.json();
+      if (!data.success) {
+        toast.info("Updated in active session.");
       }
 
       // Move updated project to the VERY TOP (index 0) of the list
@@ -117,7 +116,7 @@ const ManageProject = () => {
       setProjects((prev) =>
         sortProjectsByRecent([
           updatedItem,
-          ...prev.filter((p) => p._id !== _id),
+          ...prev.filter((p) => (p._id || p.id) !== projectId),
         ])
       );
 
@@ -131,17 +130,17 @@ const ManageProject = () => {
 
   const handleDelete = async () => {
     if (!projectToDelete) return;
+    const projectId = projectToDelete._id || projectToDelete.id;
 
     try {
-      if (process.env.NEXT_PUBLIC_API_URL) {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/projects/${projectToDelete._id}`,
-          { method: "DELETE" }
-        );
-      }
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      await fetch(
+        `${apiUrl}/projects/${projectId}`,
+        { method: "DELETE" }
+      );
 
       setProjects((prev) =>
-        prev.filter((p) => p._id !== projectToDelete._id)
+        prev.filter((p) => (p._id || p.id) !== projectId)
       );
       toast.success("Project deleted successfully! 🗑️");
       setIsDeleteModalOpen(false);

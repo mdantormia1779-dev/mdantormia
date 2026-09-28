@@ -35,21 +35,13 @@ const Navbar = () => {
     }
   }, [mobileOpen]);
 
-  const handleDownload = async () => {
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || ""}/downloads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ downloadType: "CV" }),
-      });
-    } catch (error) {
-      console.log("Download tracking:", error);
-    }
-
+  const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/antor.pdf";
-    link.download = "Antor_CV.pdf";
+    link.href = "/api/cv/download";
+    link.setAttribute("download", "");
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   const navLinks = [

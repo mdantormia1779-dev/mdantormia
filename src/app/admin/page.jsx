@@ -5,13 +5,13 @@ import Link from "next/link";
 import Overview from "../components/AdimDashboard/Overview/Overview";
 import DashboardChart from "../components/AdimDashboard/DashboardChart/DashboardChart";
 import ProjectPieChart from "../components/AdimDashboard/PieChart/PieChart";
-import { FolderPlus, FolderKanban, Globe, ArrowUpRight } from "lucide-react";
+import { FolderPlus, FolderKanban, FileText, Globe, ArrowUpRight } from "lucide-react";
 
 const AdminDashboard = () => {
   return (
     <div className="space-y-6 pb-10">
       {/* Quick Navigation Shortcuts */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Link
           href="/admin/createproject"
           className="p-4 rounded-2xl bg-indigo-500/10 hover:bg-indigo-500/15 border border-indigo-500/20 hover:border-indigo-500/40 transition-all flex items-center justify-between group"
@@ -21,8 +21,8 @@ const AdminDashboard = () => {
               <FolderPlus size={18} />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">Create New Project</p>
-              <p className="text-[11px] text-gray-400">Publish a new showcase item</p>
+              <p className="text-sm font-bold text-white">Create Project</p>
+              <p className="text-[11px] text-gray-400">Publish showcase item</p>
             </div>
           </div>
           <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -38,10 +38,26 @@ const AdminDashboard = () => {
             </div>
             <div>
               <p className="text-sm font-bold text-white">Manage Projects</p>
-              <p className="text-[11px] text-gray-400">Edit, update, or remove projects</p>
+              <p className="text-[11px] text-gray-400">Edit or delete projects</p>
             </div>
           </div>
           <ArrowUpRight size={16} className="text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
+
+        <Link
+          href="/admin/cv"
+          className="p-4 rounded-2xl bg-rose-500/10 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/40 transition-all flex items-center justify-between group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-rose-500 text-white shadow-md shadow-rose-500/30">
+              <FileText size={18} />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white">Manage & Upload CV</p>
+              <p className="text-[11px] text-gray-400">Upload new resume PDF</p>
+            </div>
+          </div>
+          <ArrowUpRight size={16} className="text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
 
         <Link
@@ -54,8 +70,8 @@ const AdminDashboard = () => {
               <Globe size={18} />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">View Live Website</p>
-              <p className="text-[11px] text-gray-400">Preview changes on live site</p>
+              <p className="text-sm font-bold text-white">Live Website</p>
+              <p className="text-[11px] text-gray-400">Preview live changes</p>
             </div>
           </div>
           <ArrowUpRight size={16} className="text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -7,7 +7,7 @@ export default function VisitTracker() {
     const trackVisit = async () => {
       try {
         // ব্যাকএন্ডের API রিকোয়েস্ট
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/visits`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || ""}/api/visits`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
         });

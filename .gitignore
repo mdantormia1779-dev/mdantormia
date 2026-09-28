@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backups & migration files
+mongo_backup.json
+*backup*.json
+migrate_mongo_to_postgres.js
+

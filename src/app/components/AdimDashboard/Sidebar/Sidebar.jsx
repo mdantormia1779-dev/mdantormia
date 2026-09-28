@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   FolderPlus,
   FolderKanban,
+  FileText,
   Globe,
   X,
   ShieldCheck,
@@ -29,6 +30,11 @@ const Sidebar = ({ isOpen, onClose }) => {
       name: "Manage Projects",
       path: "/admin/manageproject",
       icon: <FolderKanban size={18} />,
+    },
+    {
+      name: "Manage & Upload CV",
+      path: "/admin/cv",
+      icon: <FileText size={18} />,
     },
   ];
 
