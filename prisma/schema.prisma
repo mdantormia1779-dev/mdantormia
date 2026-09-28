@@ -91,8 +91,9 @@ model Stat {
 model Cv {
   id         String   @id @default(cuid())
   fileName   String   @default("Antor_CV.pdf")
-  fileUrl    String   @default("/antor.pdf")
+  fileUrl    String   @default("/api/cv/download")
   fileSize   Int?
+  fileBase64 String?  @db.Text
   uploadedAt DateTime @default(now())
   updatedAt  DateTime @updatedAt
   isActive   Boolean  @default(true)

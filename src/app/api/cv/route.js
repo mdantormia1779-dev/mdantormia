@@ -3,12 +3,19 @@ import prisma from "@/lib/prisma";
 import fs from "fs/promises";
 import path from "path";
 
-// GET active CV info
+// GET active CV info (metadata only, without heavy base64)
 export async function GET() {
   try {
     const cv = await prisma.cv.findFirst({
       where: { isActive: true },
       orderBy: { uploadedAt: "desc" },
+      select: {
+        id: true,
+        fileName: true,
+        fileUrl: true,
+        fileSize: true,
+        uploadedAt: true,
+      },
     });
 
     if (!cv) {
@@ -16,7 +23,7 @@ export async function GET() {
         success: true,
         data: {
           fileName: "Antor_CV.pdf",
-          fileUrl: "/antor.pdf",
+          fileUrl: "/api/cv/download",
           fileSize: null,
           uploadedAt: null,
         },
@@ -34,7 +41,7 @@ export async function GET() {
         success: false,
         data: {
           fileName: "Antor_CV.pdf",
-          fileUrl: "/antor.pdf",
+          fileUrl: "/api/cv/download",
         },
       },
       { status: 500 }
@@ -42,7 +49,7 @@ export async function GET() {
   }
 }
 
-// POST upload new CV
+// POST upload new CV - stores directly into PostgreSQL & supports serverless runtimes
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -63,20 +70,19 @@ export async function POST(request) {
       );
     }
 
+    // Convert file to buffer and base64
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const fileBase64 = buffer.toString("base64");
 
-    // Save directly to public/antor.pdf so default link always stays updated
-    const publicPath = path.join(process.cwd(), "public");
-    const targetFile = path.join(publicPath, "antor.pdf");
-    await fs.writeFile(targetFile, buffer);
-
-    // Also save in public/uploads with unique name for history tracking
-    const uploadsDir = path.join(publicPath, "uploads");
-    await fs.mkdir(uploadsDir, { recursive: true });
-    const safeName = `cv_${Date.now()}_${originalName.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
-    const uploadFilePath = path.join(uploadsDir, safeName);
-    await fs.writeFile(uploadFilePath, buffer);
+    // Attempt local file write (works in local dev, gracefully ignored on read-only serverless environments like Vercel)
+    try {
+      const publicPath = path.join(process.cwd(), "public");
+      const targetFile = path.join(publicPath, "antor.pdf");
+      await fs.writeFile(targetFile, buffer);
+    } catch {
+      // Ignored: Vercel serverless filesystem is read-only
+    }
 
     // Deactivate previous active CVs
     await prisma.cv.updateMany({
@@ -84,13 +90,21 @@ export async function POST(request) {
       data: { isActive: false },
     });
 
-    // Create new active CV record in PostgreSQL
+    // Save full PDF into PostgreSQL database
     const newCv = await prisma.cv.create({
       data: {
         fileName: originalName,
-        fileUrl: "/antor.pdf",
+        fileUrl: "/api/cv/download",
         fileSize: buffer.length,
+        fileBase64: fileBase64,
         isActive: true,
+      },
+      select: {
+        id: true,
+        fileName: true,
+        fileUrl: true,
+        fileSize: true,
+        uploadedAt: true,
       },
     });
 
@@ -104,7 +118,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to upload CV",
+        message: "Failed to upload CV: " + error.message,
         error: error.message,
       },
       { status: 500 }

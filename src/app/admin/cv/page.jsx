@@ -228,7 +228,7 @@ export default function ManageCvPage() {
               </a>
 
               <a
-                href={`/antor.pdf?v=${previewKey}`}
+                href={`/api/cv/preview?v=${previewKey}`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-semibold text-xs transition-all hover:scale-[1.02]"
@@ -365,7 +365,7 @@ export default function ManageCvPage() {
         <div className="w-full h-[520px] rounded-2xl overflow-hidden border border-white/10 bg-gray-900/60 flex items-center justify-center">
           <iframe
             key={previewKey}
-            src={`/antor.pdf?v=${previewKey}#toolbar=0`}
+            src={`/api/cv/preview?v=${previewKey}#toolbar=0`}
             className="w-full h-full border-0 rounded-2xl"
             title="CV Document Preview"
           />

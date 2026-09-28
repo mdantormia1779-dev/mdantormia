@@ -4,18 +4,6 @@ import path from "path";
 
 export async function GET() {
   try {
-    // 1. Increment CV download count in stats
-    try {
-      await prisma.stat.upsert({
-        where: { type: "CV" },
-        update: { count: { increment: 1 } },
-        create: { type: "CV", count: 1 },
-      });
-    } catch (e) {
-      console.error("Failed to increment CV count:", e);
-    }
-
-    // 2. Fetch active CV from PostgreSQL
     const activeCv = await prisma.cv.findFirst({
       where: { isActive: true },
       orderBy: { uploadedAt: "desc" },
@@ -23,20 +11,18 @@ export async function GET() {
 
     const fileName = activeCv?.fileName || "Antor_CV.pdf";
 
-    // 3. If file exists in database as Base64, stream it directly
     if (activeCv?.fileBase64) {
       const fileBuffer = Buffer.from(activeCv.fileBase64, "base64");
       return new Response(fileBuffer, {
         status: 200,
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `attachment; filename="${encodeURIComponent(fileName)}"`,
+          "Content-Disposition": `inline; filename="${encodeURIComponent(fileName)}"`,
           "Cache-Control": "public, max-age=3600",
         },
       });
     }
 
-    // 4. Fallback to static bundled antor.pdf
     const filePath = path.join(process.cwd(), "public", "antor.pdf");
     const fileBuffer = await fs.readFile(filePath);
 
@@ -44,15 +30,12 @@ export async function GET() {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${encodeURIComponent(fileName)}"`,
+        "Content-Disposition": `inline; filename="${encodeURIComponent(fileName)}"`,
         "Cache-Control": "public, max-age=3600",
       },
     });
   } catch (error) {
-    console.error("Error serving CV download:", error);
-    return new Response("CV file not found or download failed", {
-      status: 404,
-      headers: { "Content-Type": "text/plain" },
-    });
+    console.error("Error serving CV preview:", error);
+    return new Response("Preview unavailable", { status: 404 });
   }
 }
