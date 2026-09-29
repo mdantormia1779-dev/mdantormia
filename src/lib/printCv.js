@@ -63,22 +63,22 @@ export function generateCvHtml(data) {
             width: 100% !important;
             max-width: 210mm !important;
             box-sizing: border-box !important;
-            padding: 12mm 16mm 10mm 16mm !important;
+            padding: 10mm 15mm 8mm 15mm !important;
             margin: 0 auto !important;
             background: #ffffff !important;
             color: #000000 !important;
-            font-size: 14px !important;
-            line-height: 1.42 !important;
+            font-size: 15px !important;
+            line-height: 1.4 !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 11px !important;
+            margin-bottom: 9px !important;
             width: 100% !important;
           }
           .header-name {
-            font-size: 21px !important;
+            font-size: 22px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 2px 0 !important;
@@ -86,29 +86,29 @@ export function generateCvHtml(data) {
             line-height: 1.2 !important;
           }
           .header-title {
-            font-size: 15px !important;
+            font-size: 16px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 2px 0 !important;
             text-align: center !important;
           }
           .header-contact {
-            font-size: 13px !important;
+            font-size: 13.5px !important;
             color: #000000 !important;
             margin: 2px 0 !important;
             text-align: center !important;
           }
           .header-links {
-            font-size: 13px !important;
+            font-size: 13.5px !important;
             color: #000000 !important;
             margin: 2px 0 !important;
             text-align: center !important;
           }
           .section-title {
             font-weight: bold !important;
-            font-size: 15px !important;
+            font-size: 16px !important;
             color: #000000 !important;
-            margin-top: 11px !important;
+            margin-top: 10px !important;
             margin-bottom: 2px !important;
             text-align: left !important;
           }
@@ -122,12 +122,12 @@ export function generateCvHtml(data) {
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 1.5px !important;
-            line-height: 1.38 !important;
+            margin-bottom: 1px !important;
+            line-height: 1.36 !important;
           }
           p {
             margin: 0 !important;
-            line-height: 1.42 !important;
+            line-height: 1.38 !important;
           }
         </style>
       </head>
@@ -150,7 +150,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.42;">
+            <p style="text-align: justify; line-height: 1.38;">
               ${objectiveHtml}
             </p>
           </div>
@@ -161,7 +161,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Professional Experience</div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
+              <div style="display: flex; flex-direction: column; gap: 4px;">
                 ${experiences
                   .map(
                     (exp) => `
@@ -208,7 +208,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Projects:</div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 7px;">
                 ${projects
                   .map(
                     (proj) => `
@@ -348,12 +348,12 @@ export function printCvDocument(cvDataOrElementId) {
             .cv-paper {
               width: 100% !important;
               box-sizing: border-box !important;
-              padding: 12mm 16mm 10mm 16mm !important;
+              padding: 10mm 15mm 8mm 15mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
-              font-size: 14px !important;
-              line-height: 1.42 !important;
+              font-size: 15px !important;
+              line-height: 1.4 !important;
             }
           </style>
         </head>
