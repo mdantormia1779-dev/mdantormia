@@ -3,7 +3,9 @@ import prisma from "@/lib/prisma";
 import fs from "fs/promises";
 import path from "path";
 
-// GET active CV info (metadata only, without heavy base64)
+import { defaultCvData } from "@/lib/defaultCvData";
+
+// GET active CV info and structured CV data
 export async function GET() {
   try {
     const cv = await prisma.cv.findFirst({
@@ -15,6 +17,7 @@ export async function GET() {
         fileUrl: true,
         fileSize: true,
         uploadedAt: true,
+        data: true,
       },
     });
 
@@ -26,13 +29,17 @@ export async function GET() {
           fileUrl: "/api/cv/download",
           fileSize: null,
           uploadedAt: null,
+          cvData: defaultCvData,
         },
       });
     }
 
     return NextResponse.json({
       success: true,
-      data: cv,
+      data: {
+        ...cv,
+        cvData: cv.data || defaultCvData,
+      },
     });
   } catch (error) {
     console.error("Failed to fetch CV info:", error);
@@ -42,7 +49,61 @@ export async function GET() {
         data: {
           fileName: "Antor_CV.pdf",
           fileUrl: "/api/cv/download",
+          cvData: defaultCvData,
         },
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// PUT update structured CV template data
+export async function PUT(request) {
+  try {
+    const body = await request.json();
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { success: false, message: "Invalid CV data provided ❌" },
+        { status: 400 }
+      );
+    }
+
+    // Find active CV record or create one
+    let activeCv = await prisma.cv.findFirst({
+      where: { isActive: true },
+      orderBy: { uploadedAt: "desc" },
+    });
+
+    if (activeCv) {
+      activeCv = await prisma.cv.update({
+        where: { id: activeCv.id },
+        data: {
+          data: body,
+          updatedAt: new Date(),
+        },
+      });
+    } else {
+      activeCv = await prisma.cv.create({
+        data: {
+          fileName: "Antor_CV.pdf",
+          fileUrl: "/api/cv/download",
+          isActive: true,
+          data: body,
+        },
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "CV details updated and saved successfully! 🎉",
+      data: activeCv.data,
+    });
+  } catch (error) {
+    console.error("Failed to update CV data:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to save CV data: " + error.message,
       },
       { status: 500 }
     );

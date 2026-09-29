@@ -77,4 +77,60 @@
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
+}
+
+/* Print optimization for CV / Resume */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    overflow: visible !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide background glows, cursor, navbar, footer, buttons, toasts, admin wrappers */
+  header,
+  footer,
+  nav,
+  aside,
+  button,
+  .no-print,
+  .Toastify,
+  [data-cursor],
+  [class*="BackgroundGlow"],
+  [class*="CustomCursor"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  #printable-cv-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  #printable-cv-area * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
