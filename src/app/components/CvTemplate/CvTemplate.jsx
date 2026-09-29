@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { ExternalLink, Mail, Phone, MapPin, Globe } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function CvTemplate({ data, printableRef }) {
   if (!data) return null;
@@ -21,217 +19,215 @@ export default function CvTemplate({ data, printableRef }) {
     <div
       ref={printableRef}
       id="printable-cv-area"
-      className="cv-paper bg-white text-gray-900 font-sans shadow-2xl mx-auto transition-all"
+      className="cv-paper bg-white text-black shadow-2xl mx-auto"
       style={{
         width: "100%",
         maxWidth: "210mm",
         minHeight: "297mm",
-        padding: "12mm 14mm",
+        padding: "16mm 18mm",
         boxSizing: "border-box",
-        fontSize: "10.5pt",
-        lineHeight: "1.4",
-        color: "#111827",
+        fontFamily: "Arial, Helvetica, sans-serif",
+        fontSize: "12px",
+        lineHeight: "1.45",
+        color: "#000000",
       }}
     >
       {/* HEADER SECTION */}
-      <header className="text-center pb-2.5 mb-2.5 border-b border-gray-300">
-        <h1 className="text-2xl font-black tracking-wider uppercase text-gray-950 font-serif">
-          {personalInfo.fullName || "MD ANTOR MIA"}
+      <div className="text-center mb-3">
+        <h1 className="text-[17px] font-bold text-black tracking-normal">
+          {personalInfo.fullName || "Md Antor Mia"}
         </h1>
-        <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-indigo-700 mt-0.5">
+        <div className="text-[13px] font-bold text-black mt-0.5">
           {personalInfo.title || "MERN Stack Developer"}
-        </p>
-
-        {/* Contact Info Line */}
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-gray-600 mt-2">
-          {personalInfo.phone && (
-            <span className="flex items-center gap-1">
-              <Phone size={11} className="text-gray-500" />
-              <a href={`tel:${personalInfo.phone}`} className="hover:underline text-gray-800">
-                {personalInfo.phone}
-              </a>
-            </span>
-          )}
-          {personalInfo.phone && personalInfo.email && <span className="text-gray-300">|</span>}
-          {personalInfo.email && (
-            <span className="flex items-center gap-1">
-              <Mail size={11} className="text-gray-500" />
-              <a href={`mailto:${personalInfo.email}`} className="hover:underline text-gray-800">
-                {personalInfo.email}
-              </a>
-            </span>
-          )}
-          {personalInfo.email && personalInfo.location && <span className="text-gray-300">|</span>}
-          {personalInfo.location && (
-            <span className="flex items-center gap-1">
-              <MapPin size={11} className="text-gray-500" />
-              <span className="text-gray-800">{personalInfo.location}</span>
-            </span>
-          )}
         </div>
 
-        {/* Social / Portfolio Links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-medium text-indigo-600 mt-1.5">
-          {personalInfo.github && (
+        {/* Contact info line */}
+        <div className="text-[12px] text-black mt-1">
+          <span>{personalInfo.phone || "+8801318964063"}</span>
+          <span> | </span>
+          <a
+            href={`mailto:${personalInfo.email || "mdantormia1779@gmail.com"}`}
+            className="hover:underline text-black"
+          >
+            {personalInfo.email || "mdantormia1779@gmail.com"}
+          </a>
+          <span>| </span>
+          <span>{personalInfo.location || "Rangpur,Bangladesh"}</span>
+        </div>
+
+        {/* Links line: Underlined text with pipe */}
+        <div className="text-[12px] text-black mt-1">
+          {personalInfo.github ? (
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 hover:underline hover:text-indigo-800"
+              className="underline text-black hover:text-blue-700"
             >
-              <FaGithub size={11} />
-              <span>GitHub</span>
+              GitHub
             </a>
+          ) : (
+            <span className="underline">GitHub</span>
           )}
-          {personalInfo.github && personalInfo.portfolio && <span className="text-gray-300">|</span>}
-          {personalInfo.portfolio && (
+          <span> | </span>
+          {personalInfo.portfolio ? (
             <a
               href={personalInfo.portfolio}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 hover:underline hover:text-indigo-800"
+              className="underline text-black hover:text-blue-700"
             >
-              <Globe size={11} />
-              <span>Portfolio</span>
+              Portfolio
             </a>
+          ) : (
+            <span className="underline">Portfolio</span>
           )}
-          {personalInfo.portfolio && personalInfo.linkedin && <span className="text-gray-300">|</span>}
-          {personalInfo.linkedin && (
+          <span> | </span>
+          {personalInfo.linkedin ? (
             <a
               href={personalInfo.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 hover:underline hover:text-indigo-800"
+              className="underline text-black hover:text-blue-700"
             >
-              <FaLinkedin size={11} />
-              <span>LinkedIn</span>
+              Linkedin
             </a>
+          ) : (
+            <span className="underline">Linkedin</span>
           )}
         </div>
-      </header>
+      </div>
 
       {/* CAREER OBJECTIVE */}
-      {objective && (
-        <section className="mb-3">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
-            Career Objective
-          </h2>
-          <p className="text-[11px] leading-relaxed text-gray-800 text-justify">
-            {objective}
-          </p>
-        </section>
-      )}
+      <div className="mb-3.5">
+        <div className="font-bold text-[13px] text-black mb-1">
+          Career Objective
+        </div>
+        <p className="text-[12px] text-black leading-[1.45] text-justify">
+          {objective ? (
+            // Render with bold for MERN Stack Developer if present
+            objective.includes("MERN Stack Developer") ? (
+              <>
+                {objective.split("MERN Stack Developer")[0]}
+                <strong>MERN Stack Developer</strong>
+                {objective.split("MERN Stack Developer").slice(1).join("MERN Stack Developer")}
+              </>
+            ) : (
+              objective
+            )
+          ) : (
+            <>
+              Motivated <strong>MERN Stack Developer</strong> with hands-on experience in React.js, Next.js, Node.js, and modern web technologies. Experienced in building responsive, scalable, and user-friendly applications. Seeking an opportunity to contribute to real-world projects while growing as a professional Full-Stack Developer.
+            </>
+          )}
+        </p>
+      </div>
 
       {/* PROFESSIONAL EXPERIENCE */}
       {experiences && experiences.length > 0 && (
-        <section className="mb-3">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
+        <div className="mb-3.5">
+          <div className="font-bold text-[13px] text-black mb-1">
             Professional Experience
-          </h2>
-          <div className="space-y-2">
+          </div>
+          <div className="space-y-1.5 text-[12px] leading-[1.45]">
             {experiences.map((exp, idx) => (
-              <div key={exp.id || idx} className="text-[11px]">
-                <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-gray-950">
-                    {exp.role}
-                    {exp.typeOrCompany && (
-                      <span className="font-semibold text-gray-600"> | {exp.typeOrCompany}</span>
-                    )}
-                  </span>
-                  {exp.duration && (
-                    <span className="text-[10px] text-gray-500 font-medium">{exp.duration}</span>
-                  )}
-                </div>
-                {exp.description && (
-                  <p className="text-gray-700 leading-snug mt-0.5">{exp.description}</p>
-                )}
-              </div>
+              <p key={exp.id || idx} className="text-black">
+                <strong>
+                  {exp.role}
+                  {exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""}
+                </strong>
+                {exp.description ? ` — ${exp.description}` : ""}
+              </p>
             ))}
           </div>
-        </section>
+        </div>
       )}
 
-      {/* TECHNICAL SKILLS */}
+      {/* TECHNICAL SKILL */}
       {skills && (
-        <section className="mb-3">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
-            Technical Skills
-          </h2>
-          <div className="space-y-1 text-[11px]">
+        <div className="mb-3.5">
+          <div className="font-bold text-[13px] text-black mb-1">
+            Technical Skill
+          </div>
+          <ul className="list-disc list-outside ml-6 space-y-0.5 text-[12px] leading-[1.4] text-black">
             {skills.frontend && (
-              <p className="leading-snug">
-                <span className="font-bold text-gray-950">Frontend: </span>
-                <span className="text-gray-800">{skills.frontend}</span>
-              </p>
+              <li>
+                <strong>Frontend: </strong>
+                <span>{skills.frontend}</span>
+              </li>
             )}
             {skills.backend && (
-              <p className="leading-snug">
-                <span className="font-bold text-gray-950">Backend: </span>
-                <span className="text-gray-800">{skills.backend}</span>
-              </p>
+              <li>
+                <strong>Backend: </strong>
+                <span>{skills.backend}</span>
+              </li>
             )}
             {skills.programming && (
-              <p className="leading-snug">
-                <span className="font-bold text-gray-950">Programming Languages: </span>
-                <span className="text-gray-800">{skills.programming}</span>
-              </p>
+              <li>
+                <strong>Programming Languages: </strong>
+                <span>{skills.programming}</span>
+              </li>
             )}
             {skills.tools && (
-              <p className="leading-snug">
-                <span className="font-bold text-gray-950">Tools: </span>
-                <span className="text-gray-800">{skills.tools}</span>
-              </p>
+              <li>
+                <strong>Tools: </strong>
+                <span>{skills.tools}</span>
+              </li>
             )}
-          </div>
-        </section>
+          </ul>
+        </div>
       )}
 
       {/* PROJECTS */}
       {projects && projects.length > 0 && (
-        <section className="mb-3">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
-            Projects
-          </h2>
-          <div className="space-y-2.5">
+        <div className="mb-3.5">
+          <div className="font-bold text-[13px] text-black mb-1">
+            Projects:
+          </div>
+          <div className="space-y-3 text-[12px]">
             {projects.map((proj, idx) => (
-              <div key={proj.id || idx} className="text-[11px]">
-                <div className="flex flex-wrap items-baseline gap-x-2">
-                  <span className="font-bold text-gray-950 text-[11.5px]">{proj.name}</span>
-                  <div className="flex items-center gap-1.5 text-[10.5px]">
-                    {proj.liveUrl && (
-                      <a
-                        href={proj.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-0.5 underline"
-                      >
-                        <span>Live</span>
-                        <ExternalLink size={9} />
-                      </a>
-                    )}
-                    {proj.liveUrl && proj.githubUrl && <span className="text-gray-400">•</span>}
-                    {proj.githubUrl && (
-                      <a
-                        href={proj.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-0.5 underline"
-                      >
-                        <span>Source Code</span>
-                        <ExternalLink size={9} />
-                      </a>
-                    )}
-                  </div>
+              <div key={proj.id || idx}>
+                {/* Project Title and Links line */}
+                <div className="text-black">
+                  <strong className="text-black">{proj.name}</strong>{" "}
+                  {proj.liveUrl ? (
+                    <a
+                      href={proj.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline text-black hover:text-blue-700"
+                    >
+                      Live link
+                    </a>
+                  ) : (
+                    <span className="underline">Live link</span>
+                  )}{" "}
+                  |{" "}
+                  {proj.githubUrl ? (
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline text-black hover:text-blue-700"
+                    >
+                      Source Code
+                    </a>
+                  ) : (
+                    <span className="underline">Source Code</span>
+                  )}
                 </div>
 
+                {/* Technologies */}
                 {proj.technologies && (
-                  <p className="text-[10px] text-gray-600 font-medium mt-0.5">
-                    <span className="font-semibold text-gray-700">Tech:</span> {proj.technologies}
-                  </p>
+                  <div className="text-black mt-0.5">
+                    <strong>Technologies: </strong>
+                    <span>{proj.technologies}</span>
+                  </div>
                 )}
 
+                {/* Highlights Bullets */}
                 {proj.highlights && proj.highlights.length > 0 && (
-                  <ul className="list-disc list-outside ml-4 mt-1 space-y-0.5 text-gray-800 text-[10.5px] leading-tight">
+                  <ul className="list-disc list-outside ml-6 mt-0.5 space-y-0.5 text-black text-[12px] leading-[1.35]">
                     {proj.highlights.map((item, hIdx) => (
                       <li key={hIdx}>{item}</li>
                     ))}
@@ -240,45 +236,41 @@ export default function CvTemplate({ data, printableRef }) {
               </div>
             ))}
           </div>
-        </section>
+        </div>
       )}
 
       {/* EDUCATION */}
       {education && education.length > 0 && (
-        <section className="mb-3">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
-            Education
-          </h2>
-          <div className="space-y-1.5">
+        <div className="mb-3.5">
+          <div className="font-bold text-[13px] text-black mb-1 uppercase">
+            EDUCATION
+          </div>
+          <div className="text-[12px] text-black leading-[1.4]">
             {education.map((edu, idx) => (
-              <div key={edu.id || idx} className="text-[11px] flex justify-between items-baseline">
-                <div>
-                  <span className="font-bold text-gray-950">{edu.degree}</span>
-                  {edu.institution && (
-                    <span className="text-gray-700"> - {edu.institution}</span>
-                  )}
-                </div>
-                {edu.year && <span className="text-[10px] text-gray-500 font-medium">{edu.year}</span>}
+              <div key={edu.id || idx}>
+                <span>{edu.degree}</span>
+                {edu.institution ? `-${edu.institution}` : ""}
+                {edu.year ? ` (${edu.year})` : ""}
               </div>
             ))}
           </div>
-        </section>
+        </div>
       )}
 
-      {/* LANGUAGES */}
+      {/* LANGUAGE */}
       {languages && languages.length > 0 && (
-        <section className="mb-2">
-          <h2 className="text-[12px] font-bold tracking-wider uppercase text-gray-900 border-b border-gray-400 pb-0.5 mb-1.5">
-            Languages
-          </h2>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
-            {languages.map((lang, idx) => (
-              <span key={lang.id || idx} className="text-gray-800">
-                <strong className="text-gray-950">{lang.name}:</strong> {lang.proficiency}
-              </span>
-            ))}
+        <div className="mb-2">
+          <div className="font-bold text-[13px] text-black mb-1 uppercase">
+            LANGUAGE
           </div>
-        </section>
+          <ul className="list-disc list-outside ml-6 space-y-0.5 text-[12px] leading-[1.4] text-black">
+            {languages.map((lang, idx) => (
+              <li key={lang.id || idx}>
+                {lang.name}: {lang.proficiency}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

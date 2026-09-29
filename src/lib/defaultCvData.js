@@ -4,7 +4,7 @@ export const defaultCvData = {
     title: "MERN Stack Developer",
     phone: "+8801318964063",
     email: "mdantormia1779@gmail.com",
-    location: "Rangpur, Bangladesh",
+    location: "Rangpur,Bangladesh",
     github: "https://github.com/mdantormia1779-dev",
     portfolio: "https://mdantormia.vercel.app",
     linkedin: "https://linkedin.com/in/mdantormia",
@@ -29,7 +29,7 @@ export const defaultCvData = {
   ],
   skills: {
     frontend:
-      "HTML5, CSS3, JavaScript (ES6+), TypeScript, React.js, Next.js, Tailwind CSS, ShadCN UI, DaisyUI, Redux Toolkit, React Hook Form, Yup",
+      "HTML5, CSS3, JavaScript (ES6+), TypeScript, React.js, Next.js, Tailwind CSS, ShadCN UI, DaisyUI, Redux Toolkit, React Hook Form, Yup.",
     backend:
       "Node.js, Express.js, REST APIs, MongoDB, Mongoose, SQL, Prisma ORM, Better Auth, Google OAuth",
     programming: "JavaScript, TypeScript, Python",
@@ -42,7 +42,7 @@ export const defaultCvData = {
       liveUrl: "https://antorsmartattendencesystem.vercel.app",
       githubUrl: "https://github.com/mdantormia1779-dev",
       technologies:
-        "Next.js, TypeScript, Prisma ORM, PostgreSQL, React Native Mobile App, JWT Authentication",
+        "Next.js, TypeScript, Prisma ORM, PostgreSQL,React Native Mobile App, JWT Authentication",
       highlights: [
         "AI Face Recognition & Liveness Verification Attendance",
         "GPS Geofencing-based Secure Check-In/Check-Out",
@@ -57,9 +57,9 @@ export const defaultCvData = {
       technologies:
         "Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL, Redux Toolkit, GSAP, Cloudinary",
       highlights: [
-        "Smart product search, filtering, flash sales, reviews, ratings, and product Q&A",
-        "Cart, Buy Now, Cash on Delivery, live order tracking, and customer order management",
-        "Advanced admin dashboard with revenue analytics, product/order management, cloud image uploads",
+        "smart product search, filtering, flash sales, reviews, ratings, and product Q&A.",
+        "cart, Buy Now, Cash on Delivery, live order tracking, and customer order management.",
+        "Advanced admin dashboard with revenue analytics, product/order management, cloud image uploads.",
       ],
     },
   ],
