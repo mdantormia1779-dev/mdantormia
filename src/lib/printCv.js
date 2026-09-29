@@ -63,22 +63,22 @@ export function generateCvHtml(data) {
             width: 100% !important;
             max-width: 210mm !important;
             box-sizing: border-box !important;
-            padding: 14mm 16mm 12mm 16mm !important;
+            padding: 12mm 16mm 10mm 16mm !important;
             margin: 0 auto !important;
             background: #ffffff !important;
             color: #000000 !important;
-            font-size: 13px !important;
-            line-height: 1.48 !important;
+            font-size: 14px !important;
+            line-height: 1.42 !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 13px !important;
+            margin-bottom: 11px !important;
             width: 100% !important;
           }
           .header-name {
-            font-size: 20px !important;
+            font-size: 21px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 2px 0 !important;
@@ -86,30 +86,30 @@ export function generateCvHtml(data) {
             line-height: 1.2 !important;
           }
           .header-title {
-            font-size: 14px !important;
+            font-size: 15px !important;
             font-weight: bold !important;
             color: #000000 !important;
-            margin: 0 0 3px 0 !important;
+            margin: 0 0 2px 0 !important;
             text-align: center !important;
           }
           .header-contact {
-            font-size: 12.5px !important;
+            font-size: 13px !important;
             color: #000000 !important;
             margin: 2px 0 !important;
             text-align: center !important;
           }
           .header-links {
-            font-size: 12.5px !important;
+            font-size: 13px !important;
             color: #000000 !important;
             margin: 2px 0 !important;
             text-align: center !important;
           }
           .section-title {
             font-weight: bold !important;
-            font-size: 14px !important;
+            font-size: 15px !important;
             color: #000000 !important;
-            margin-top: 14px !important;
-            margin-bottom: 3px !important;
+            margin-top: 11px !important;
+            margin-bottom: 2px !important;
             text-align: left !important;
           }
           a {
@@ -122,12 +122,12 @@ export function generateCvHtml(data) {
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 2px !important;
-            line-height: 1.42 !important;
+            margin-bottom: 1.5px !important;
+            line-height: 1.38 !important;
           }
           p {
             margin: 0 !important;
-            line-height: 1.46 !important;
+            line-height: 1.42 !important;
           }
         </style>
       </head>
@@ -150,7 +150,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.46;">
+            <p style="text-align: justify; line-height: 1.42;">
               ${objectiveHtml}
             </p>
           </div>
@@ -208,7 +208,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Projects:</div>
-              <div style="display: flex; flex-direction: column; gap: 9px;">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
                 ${projects
                   .map(
                     (proj) => `
@@ -348,12 +348,12 @@ export function printCvDocument(cvDataOrElementId) {
             .cv-paper {
               width: 100% !important;
               box-sizing: border-box !important;
-              padding: 14mm 16mm 12mm 16mm !important;
+              padding: 12mm 16mm 10mm 16mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
-              font-size: 13px !important;
-              line-height: 1.48 !important;
+              font-size: 14px !important;
+              line-height: 1.42 !important;
             }
           </style>
         </head>
