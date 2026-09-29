@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Printer, Download, Sparkles, RefreshCw } from "lucide-react";
 import CvTemplate from "@/app/components/CvTemplate/CvTemplate";
 import { defaultCvData } from "@/lib/defaultCvData";
+import { printCvDocument } from "@/lib/printCv";
 
 export default function PublicCvPage() {
   const [cvData, setCvData] = useState(defaultCvData);
@@ -28,7 +29,7 @@ export default function PublicCvPage() {
   }, []);
 
   const handlePrint = () => {
-    window.print();
+    printCvDocument("printable-cv-area");
   };
 
   return (

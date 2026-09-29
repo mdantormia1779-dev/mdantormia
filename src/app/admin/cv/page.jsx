@@ -33,6 +33,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import CvTemplate from "@/app/components/CvTemplate/CvTemplate";
 import { defaultCvData } from "@/lib/defaultCvData";
+import { printCvDocument } from "@/lib/printCv";
 
 export default function ManageCvPage() {
   const [activeTab, setActiveTab] = useState("builder"); // 'builder' or 'upload'
@@ -134,7 +135,7 @@ export default function ManageCvPage() {
 
   // Print CV handler
   const handlePrint = () => {
-    window.print();
+    printCvDocument("printable-cv-area");
   };
 
   // Personal info field updater

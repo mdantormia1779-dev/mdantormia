@@ -23,31 +23,47 @@ export default function CvTemplate({ data, printableRef }) {
       style={{
         width: "100%",
         maxWidth: "210mm",
-        minHeight: "297mm",
-        padding: "16mm 18mm",
         boxSizing: "border-box",
+        padding: "14mm 16mm",
         fontFamily: "Arial, Helvetica, sans-serif",
-        fontSize: "12px",
-        lineHeight: "1.45",
+        fontSize: "11px",
+        lineHeight: "1.4",
         color: "#000000",
+        backgroundColor: "#ffffff",
       }}
     >
       {/* HEADER SECTION */}
       <div className="text-center mb-3">
-        <h1 className="text-[17px] font-bold text-black tracking-normal">
+        <h1
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: "#000000",
+            margin: "0 0 2px 0",
+            lineHeight: "1.2",
+          }}
+        >
           {personalInfo.fullName || "Md Antor Mia"}
         </h1>
-        <div className="text-[13px] font-bold text-black mt-0.5">
+        <div
+          style={{
+            fontSize: "12px",
+            fontWeight: "bold",
+            color: "#000000",
+            margin: "0 0 3px 0",
+          }}
+        >
           {personalInfo.title || "MERN Stack Developer"}
         </div>
 
-        {/* Contact info line */}
-        <div className="text-[12px] text-black mt-1">
+        {/* Contact info line: +8801318964063 | mdantormia1779@gmail.com| Rangpur,Bangladesh */}
+        <div style={{ fontSize: "11px", color: "#000000", margin: "2px 0" }}>
           <span>{personalInfo.phone || "+8801318964063"}</span>
           <span> | </span>
           <a
             href={`mailto:${personalInfo.email || "mdantormia1779@gmail.com"}`}
-            className="hover:underline text-black"
+            style={{ color: "#000000", textDecoration: "none" }}
+            className="hover:underline"
           >
             {personalInfo.email || "mdantormia1779@gmail.com"}
           </a>
@@ -55,19 +71,19 @@ export default function CvTemplate({ data, printableRef }) {
           <span>{personalInfo.location || "Rangpur,Bangladesh"}</span>
         </div>
 
-        {/* Links line: Underlined text with pipe */}
-        <div className="text-[12px] text-black mt-1">
+        {/* Links line: GitHub | Portfolio | Linkedin (underlined text, no icons) */}
+        <div style={{ fontSize: "11px", color: "#000000", margin: "2px 0" }}>
           {personalInfo.github ? (
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noreferrer"
-              className="underline text-black hover:text-blue-700"
+              style={{ color: "#000000", textDecoration: "underline" }}
             >
               GitHub
             </a>
           ) : (
-            <span className="underline">GitHub</span>
+            <span style={{ textDecoration: "underline" }}>GitHub</span>
           )}
           <span> | </span>
           {personalInfo.portfolio ? (
@@ -75,12 +91,12 @@ export default function CvTemplate({ data, printableRef }) {
               href={personalInfo.portfolio}
               target="_blank"
               rel="noreferrer"
-              className="underline text-black hover:text-blue-700"
+              style={{ color: "#000000", textDecoration: "underline" }}
             >
               Portfolio
             </a>
           ) : (
-            <span className="underline">Portfolio</span>
+            <span style={{ textDecoration: "underline" }}>Portfolio</span>
           )}
           <span> | </span>
           {personalInfo.linkedin ? (
@@ -88,24 +104,30 @@ export default function CvTemplate({ data, printableRef }) {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="underline text-black hover:text-blue-700"
+              style={{ color: "#000000", textDecoration: "underline" }}
             >
               Linkedin
             </a>
           ) : (
-            <span className="underline">Linkedin</span>
+            <span style={{ textDecoration: "underline" }}>Linkedin</span>
           )}
         </div>
       </div>
 
       {/* CAREER OBJECTIVE */}
-      <div className="mb-3.5">
-        <div className="font-bold text-[13px] text-black mb-1">
+      <div style={{ marginBottom: "11px" }}>
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "12px",
+            color: "#000000",
+            marginBottom: "3px",
+          }}
+        >
           Career Objective
         </div>
-        <p className="text-[12px] text-black leading-[1.45] text-justify">
+        <p style={{ margin: 0, textAlign: "justify", lineHeight: "1.42" }}>
           {objective ? (
-            // Render with bold for MERN Stack Developer if present
             objective.includes("MERN Stack Developer") ? (
               <>
                 {objective.split("MERN Stack Developer")[0]}
@@ -125,13 +147,20 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROFESSIONAL EXPERIENCE */}
       {experiences && experiences.length > 0 && (
-        <div className="mb-3.5">
-          <div className="font-bold text-[13px] text-black mb-1">
+        <div style={{ marginBottom: "11px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "12px",
+              color: "#000000",
+              marginBottom: "3px",
+            }}
+          >
             Professional Experience
           </div>
-          <div className="space-y-1.5 text-[12px] leading-[1.45]">
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             {experiences.map((exp, idx) => (
-              <p key={exp.id || idx} className="text-black">
+              <p key={exp.id || idx} style={{ margin: 0, lineHeight: "1.4" }}>
                 <strong>
                   {exp.role}
                   {exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""}
@@ -145,11 +174,27 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* TECHNICAL SKILL */}
       {skills && (
-        <div className="mb-3.5">
-          <div className="font-bold text-[13px] text-black mb-1">
+        <div style={{ marginBottom: "11px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "12px",
+              color: "#000000",
+              marginBottom: "2px",
+            }}
+          >
             Technical Skill
           </div>
-          <ul className="list-disc list-outside ml-6 space-y-0.5 text-[12px] leading-[1.4] text-black">
+          <ul
+            style={{
+              margin: 0,
+              paddingLeft: "20px",
+              listStyleType: "disc",
+              display: "flex",
+              flexDirection: "column",
+              gap: "2px",
+            }}
+          >
             {skills.frontend && (
               <li>
                 <strong>Frontend: </strong>
@@ -180,27 +225,34 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROJECTS */}
       {projects && projects.length > 0 && (
-        <div className="mb-3.5">
-          <div className="font-bold text-[13px] text-black mb-1">
+        <div style={{ marginBottom: "11px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "12px",
+              color: "#000000",
+              marginBottom: "3px",
+            }}
+          >
             Projects:
           </div>
-          <div className="space-y-3 text-[12px]">
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {projects.map((proj, idx) => (
               <div key={proj.id || idx}>
                 {/* Project Title and Links line */}
-                <div className="text-black">
-                  <strong className="text-black">{proj.name}</strong>{" "}
+                <div>
+                  <strong style={{ fontWeight: "bold" }}>{proj.name}</strong>{" "}
                   {proj.liveUrl ? (
                     <a
                       href={proj.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="underline text-black hover:text-blue-700"
+                      style={{ color: "#000000", textDecoration: "underline" }}
                     >
                       Live link
                     </a>
                   ) : (
-                    <span className="underline">Live link</span>
+                    <span style={{ textDecoration: "underline" }}>Live link</span>
                   )}{" "}
                   |{" "}
                   {proj.githubUrl ? (
@@ -208,18 +260,18 @@ export default function CvTemplate({ data, printableRef }) {
                       href={proj.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="underline text-black hover:text-blue-700"
+                      style={{ color: "#000000", textDecoration: "underline" }}
                     >
                       Source Code
                     </a>
                   ) : (
-                    <span className="underline">Source Code</span>
+                    <span style={{ textDecoration: "underline" }}>Source Code</span>
                   )}
                 </div>
 
                 {/* Technologies */}
                 {proj.technologies && (
-                  <div className="text-black mt-0.5">
+                  <div style={{ margin: "1px 0" }}>
                     <strong>Technologies: </strong>
                     <span>{proj.technologies}</span>
                   </div>
@@ -227,7 +279,16 @@ export default function CvTemplate({ data, printableRef }) {
 
                 {/* Highlights Bullets */}
                 {proj.highlights && proj.highlights.length > 0 && (
-                  <ul className="list-disc list-outside ml-6 mt-0.5 space-y-0.5 text-black text-[12px] leading-[1.35]">
+                  <ul
+                    style={{
+                      margin: "2px 0 0 0",
+                      paddingLeft: "20px",
+                      listStyleType: "disc",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1.5px",
+                    }}
+                  >
                     {proj.highlights.map((item, hIdx) => (
                       <li key={hIdx}>{item}</li>
                     ))}
@@ -241,11 +302,18 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* EDUCATION */}
       {education && education.length > 0 && (
-        <div className="mb-3.5">
-          <div className="font-bold text-[13px] text-black mb-1 uppercase">
+        <div style={{ marginBottom: "11px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "12px",
+              color: "#000000",
+              marginBottom: "2px",
+            }}
+          >
             EDUCATION
           </div>
-          <div className="text-[12px] text-black leading-[1.4]">
+          <div>
             {education.map((edu, idx) => (
               <div key={edu.id || idx}>
                 <span>{edu.degree}</span>
@@ -259,11 +327,27 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* LANGUAGE */}
       {languages && languages.length > 0 && (
-        <div className="mb-2">
-          <div className="font-bold text-[13px] text-black mb-1 uppercase">
+        <div style={{ marginBottom: "4px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "12px",
+              color: "#000000",
+              marginBottom: "2px",
+            }}
+          >
             LANGUAGE
           </div>
-          <ul className="list-disc list-outside ml-6 space-y-0.5 text-[12px] leading-[1.4] text-black">
+          <ul
+            style={{
+              margin: 0,
+              paddingLeft: "20px",
+              listStyleType: "disc",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.5px",
+            }}
+          >
             {languages.map((lang, idx) => (
               <li key={lang.id || idx}>
                 {lang.name}: {lang.proficiency}
