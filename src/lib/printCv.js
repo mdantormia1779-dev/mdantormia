@@ -1,6 +1,6 @@
 /**
  * Generates clean, standalone A4 HTML representing the CV
- * with exact typography, full-width layout, casing, and spacing matching the reference image.
+ * with larger, balanced font sizes and line heights to fill the page properly.
  */
 export function generateCvHtml(data) {
   const p = data?.personalInfo || {};
@@ -61,51 +61,51 @@ export function generateCvHtml(data) {
             width: 100% !important;
             min-height: 100% !important;
             box-sizing: border-box !important;
-            padding: 14mm 16mm 14mm 16mm !important;
+            padding: 16mm 18mm !important;
             margin: 0 auto !important;
             background: #ffffff !important;
             color: #000000 !important;
-            font-size: 11.5px !important;
-            line-height: 1.45 !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 12px !important;
+            margin-bottom: 14px !important;
             width: 100% !important;
           }
           .header-name {
-            font-size: 17px !important;
-            font-weight: bold !important;
-            color: #000000 !important;
-            margin: 0 0 2px 0 !important;
-            text-align: center !important;
-            line-height: 1.2 !important;
-          }
-          .header-title {
-            font-size: 13px !important;
+            font-size: 20px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 3px 0 !important;
             text-align: center !important;
+            line-height: 1.2 !important;
+          }
+          .header-title {
+            font-size: 14.5px !important;
+            font-weight: bold !important;
+            color: #000000 !important;
+            margin: 0 0 4px 0 !important;
+            text-align: center !important;
           }
           .header-contact {
-            font-size: 11.5px !important;
+            font-size: 12.5px !important;
             color: #000000 !important;
-            margin: 2px 0 !important;
+            margin: 3px 0 !important;
             text-align: center !important;
           }
           .header-links {
-            font-size: 11.5px !important;
+            font-size: 12.5px !important;
             color: #000000 !important;
-            margin: 2px 0 !important;
+            margin: 3px 0 !important;
             text-align: center !important;
           }
           .section-title {
             font-weight: bold !important;
-            font-size: 12.5px !important;
+            font-size: 14px !important;
             color: #000000 !important;
-            margin-top: 13px !important;
-            margin-bottom: 3px !important;
+            margin-top: 15px !important;
+            margin-bottom: 4px !important;
             text-align: left !important;
           }
           a {
@@ -114,12 +114,12 @@ export function generateCvHtml(data) {
           }
           ul {
             margin: 2px 0 !important;
-            padding-left: 20px !important;
+            padding-left: 22px !important;
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 2px !important;
-            line-height: 1.4 !important;
+            margin-bottom: 2.5px !important;
+            line-height: 1.45 !important;
           }
           p {
             margin: 0 !important;
@@ -145,7 +145,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.45;">
+            <p style="text-align: justify; line-height: 1.48;">
               ${objectiveHtml}
             </p>
           </div>
@@ -156,11 +156,11 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Professional Experience</div>
-              <div style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
                 ${experiences
                   .map(
                     (exp) => `
-                  <p style="line-height: 1.4;">
+                  <p style="line-height: 1.45;">
                     <strong>${exp.role}${
                       exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""
                     }</strong>${exp.description ? ` — ${exp.description}` : ""}
@@ -203,7 +203,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Projects:</div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
                 ${projects
                   .map(
                     (proj) => `
@@ -224,7 +224,7 @@ export function generateCvHtml(data) {
                     ${
                       proj.technologies
                         ? `
-                      <div style="margin: 1px 0;">
+                      <div style="margin: 2px 0;">
                         <strong>Technologies:</strong> ${proj.technologies}
                       </div>
                     `
@@ -302,10 +302,8 @@ export function printCvDocument(cvDataOrElementId) {
   let htmlContent = "";
 
   if (typeof cvDataOrElementId === "object" && cvDataOrElementId !== null) {
-    // Generate pristine, self-contained HTML directly from data
     htmlContent = generateCvHtml(cvDataOrElementId);
   } else {
-    // Fallback: extract from DOM element
     const elementId =
       typeof cvDataOrElementId === "string"
         ? cvDataOrElementId
@@ -345,12 +343,12 @@ export function printCvDocument(cvDataOrElementId) {
             .cv-paper {
               width: 100% !important;
               box-sizing: border-box !important;
-              padding: 14mm 16mm !important;
+              padding: 16mm 18mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
-              font-size: 11.5px !important;
-              line-height: 1.45 !important;
+              font-size: 13px !important;
+              line-height: 1.5 !important;
             }
           </style>
         </head>
@@ -363,7 +361,6 @@ export function printCvDocument(cvDataOrElementId) {
     `;
   }
 
-  // Look for existing print iframe or create a new one with full standard A4 width
   let iframe = document.getElementById("cv-hidden-print-iframe");
   if (!iframe) {
     iframe = document.createElement("iframe");
@@ -385,7 +382,6 @@ export function printCvDocument(cvDataOrElementId) {
   doc.write(htmlContent);
   doc.close();
 
-  // Give the browser 300ms to parse and layout before printing
   setTimeout(() => {
     iframe.contentWindow.focus();
     iframe.contentWindow.print();
