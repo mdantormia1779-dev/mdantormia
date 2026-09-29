@@ -135,7 +135,7 @@ export default function ManageCvPage() {
 
   // Print CV handler
   const handlePrint = () => {
-    printCvDocument("printable-cv-area");
+    printCvDocument(cvData);
   };
 
   // Personal info field updater

@@ -29,7 +29,7 @@ export default function PublicCvPage() {
   }, []);
 
   const handlePrint = () => {
-    printCvDocument("printable-cv-area");
+    printCvDocument(cvData);
   };
 
   return (
