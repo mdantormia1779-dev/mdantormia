@@ -24,10 +24,10 @@ export default function CvTemplate({ data, printableRef }) {
         width: "100%",
         maxWidth: "210mm",
         boxSizing: "border-box",
-        padding: "12mm 18mm 10mm 18mm",
+        padding: "9mm 16mm 8mm 16mm",
         fontFamily: "Arial, Helvetica, sans-serif",
-        fontSize: "12.2px",
-        lineHeight: "1.42",
+        fontSize: "14.2px",
+        lineHeight: "1.4",
         color: "#000000",
         backgroundColor: "#ffffff",
         margin: "0 auto",
@@ -39,12 +39,12 @@ export default function CvTemplate({ data, printableRef }) {
         style={{
           textAlign: "center",
           width: "100%",
-          margin: "0 auto 11px auto",
+          margin: "0 auto 9px auto",
         }}
       >
         <h1
           style={{
-            fontSize: "19px",
+            fontSize: "21px",
             fontWeight: "bold",
             color: "#000000",
             margin: "0 0 2px 0",
@@ -57,10 +57,10 @@ export default function CvTemplate({ data, printableRef }) {
         </h1>
         <div
           style={{
-            fontSize: "13.5px",
+            fontSize: "15.5px",
             fontWeight: "bold",
             color: "#000000",
-            margin: "0 0 3px 0",
+            margin: "0 0 2px 0",
             textAlign: "center",
             fontFamily: "Arial, Helvetica, sans-serif",
           }}
@@ -71,7 +71,7 @@ export default function CvTemplate({ data, printableRef }) {
         {/* Contact info line: +8801318964063 | mdantormia1779@gmail.com| Rangpur,Bangladesh */}
         <div
           style={{
-            fontSize: "12px",
+            fontSize: "14px",
             color: "#000000",
             margin: "2px 0",
             textAlign: "center",
@@ -94,7 +94,7 @@ export default function CvTemplate({ data, printableRef }) {
         {/* Links line: GitHub | Portfolio | Linkedin (underlined text, no icons) */}
         <div
           style={{
-            fontSize: "12px",
+            fontSize: "14px",
             color: "#000000",
             margin: "2px 0",
             textAlign: "center",
@@ -143,18 +143,18 @@ export default function CvTemplate({ data, printableRef }) {
       </div>
 
       {/* CAREER OBJECTIVE */}
-      <div style={{ marginBottom: "11px", textAlign: "left" }}>
+      <div style={{ marginBottom: "9px", textAlign: "left" }}>
         <div
           style={{
             fontWeight: "bold",
-            fontSize: "13.5px",
+            fontSize: "15.5px",
             color: "#000000",
-            marginBottom: "3px",
+            marginBottom: "2px",
           }}
         >
           Career Objective
         </div>
-        <p style={{ margin: 0, textAlign: "justify", lineHeight: "1.42" }}>
+        <p style={{ margin: 0, textAlign: "justify", lineHeight: "1.38" }}>
           {objective ? (
             objective.includes("MERN Stack Developer") ? (
               <>
@@ -175,20 +175,20 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROFESSIONAL EXPERIENCE */}
       {experiences && experiences.length > 0 && (
-        <div style={{ marginBottom: "11px", textAlign: "left" }}>
+        <div style={{ marginBottom: "9px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "13.5px",
+              fontSize: "15.5px",
               color: "#000000",
-              marginBottom: "3px",
+              marginBottom: "2px",
             }}
           >
             Professional Experience
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             {experiences.map((exp, idx) => (
-              <p key={exp.id || idx} style={{ margin: 0, lineHeight: "1.4" }}>
+              <p key={exp.id || idx} style={{ margin: 0, lineHeight: "1.36" }}>
                 <strong>
                   {exp.role}
                   {exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""}
@@ -202,13 +202,13 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* TECHNICAL SKILL */}
       {skills && (
-        <div style={{ marginBottom: "11px", textAlign: "left" }}>
+        <div style={{ marginBottom: "9px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "13.5px",
+              fontSize: "15.5px",
               color: "#000000",
-              marginBottom: "3px",
+              marginBottom: "2px",
             }}
           >
             Technical Skill
@@ -220,7 +220,7 @@ export default function CvTemplate({ data, printableRef }) {
               listStyleType: "disc",
               display: "flex",
               flexDirection: "column",
-              gap: "2px",
+              gap: "1.5px",
             }}
           >
             {skills.frontend && (
@@ -253,18 +253,18 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROJECTS */}
       {projects && projects.length > 0 && (
-        <div style={{ marginBottom: "11px", textAlign: "left" }}>
+        <div style={{ marginBottom: "9px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "13.5px",
+              fontSize: "15.5px",
               color: "#000000",
-              marginBottom: "3px",
+              marginBottom: "2px",
             }}
           >
             Projects:
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
             {projects.map((proj, idx) => (
               <div key={proj.id || idx}>
                 {/* Project Title and Links line */}
@@ -314,7 +314,7 @@ export default function CvTemplate({ data, printableRef }) {
                       listStyleType: "disc",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "1.5px",
+                      gap: "1px",
                     }}
                   >
                     {proj.highlights.map((item, hIdx) => (
@@ -330,13 +330,13 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* EDUCATION */}
       {education && education.length > 0 && (
-        <div style={{ marginBottom: "11px", textAlign: "left" }}>
+        <div style={{ marginBottom: "9px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "13.5px",
+              fontSize: "15.5px",
               color: "#000000",
-              marginBottom: "3px",
+              marginBottom: "2px",
             }}
           >
             EDUCATION
@@ -359,9 +359,9 @@ export default function CvTemplate({ data, printableRef }) {
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "13.5px",
+              fontSize: "15.5px",
               color: "#000000",
-              marginBottom: "3px",
+              marginBottom: "2px",
             }}
           >
             LANGUAGE
@@ -373,7 +373,7 @@ export default function CvTemplate({ data, printableRef }) {
               listStyleType: "disc",
               display: "flex",
               flexDirection: "column",
-              gap: "1.5px",
+              gap: "1px",
             }}
           >
             {languages.map((lang, idx) => (
