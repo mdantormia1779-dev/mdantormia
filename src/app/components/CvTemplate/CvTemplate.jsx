@@ -24,10 +24,10 @@ export default function CvTemplate({ data, printableRef }) {
         width: "100%",
         maxWidth: "210mm",
         boxSizing: "border-box",
-        padding: "12mm 16mm",
+        padding: "14mm 16mm",
         fontFamily: "Arial, Helvetica, sans-serif",
-        fontSize: "11px",
-        lineHeight: "1.4",
+        fontSize: "11.5px",
+        lineHeight: "1.45",
         color: "#000000",
         backgroundColor: "#ffffff",
         margin: "0 auto",
@@ -39,12 +39,12 @@ export default function CvTemplate({ data, printableRef }) {
         style={{
           textAlign: "center",
           width: "100%",
-          margin: "0 auto 10px auto",
+          margin: "0 auto 12px auto",
         }}
       >
         <h1
           style={{
-            fontSize: "16px",
+            fontSize: "17px",
             fontWeight: "bold",
             color: "#000000",
             margin: "0 0 2px 0",
@@ -57,7 +57,7 @@ export default function CvTemplate({ data, printableRef }) {
         </h1>
         <div
           style={{
-            fontSize: "12px",
+            fontSize: "13px",
             fontWeight: "bold",
             color: "#000000",
             margin: "0 0 3px 0",
@@ -71,7 +71,7 @@ export default function CvTemplate({ data, printableRef }) {
         {/* Contact info line: +8801318964063 | mdantormia1779@gmail.com| Rangpur,Bangladesh */}
         <div
           style={{
-            fontSize: "11px",
+            fontSize: "11.5px",
             color: "#000000",
             margin: "2px 0",
             textAlign: "center",

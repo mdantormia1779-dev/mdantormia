@@ -1,6 +1,6 @@
 /**
  * Generates clean, standalone A4 HTML representing the CV
- * with exact typography, casing, and spacing matching the reference image.
+ * with exact typography, full-width layout, casing, and spacing matching the reference image.
  */
 export function generateCvHtml(data) {
   const p = data?.personalInfo || {};
@@ -48,6 +48,8 @@ export function generateCvHtml(data) {
             print-color-adjust: exact !important;
           }
           html, body {
+            width: 100% !important;
+            height: 100% !important;
             margin: 0 !important;
             padding: 0 !important;
             background: #ffffff !important;
@@ -56,54 +58,55 @@ export function generateCvHtml(data) {
             -webkit-font-smoothing: antialiased;
           }
           .cv-container {
-            width: 210mm;
-            min-height: 297mm;
-            box-sizing: border-box;
-            padding: 16mm 18mm;
-            margin: 0 auto;
-            background: #ffffff;
-            color: #000000;
-            font-size: 11px;
-            line-height: 1.42;
+            width: 100% !important;
+            min-height: 100% !important;
+            box-sizing: border-box !important;
+            padding: 14mm 16mm 14mm 16mm !important;
+            margin: 0 auto !important;
+            background: #ffffff !important;
+            color: #000000 !important;
+            font-size: 11.5px !important;
+            line-height: 1.45 !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 12px;
+            margin-bottom: 12px !important;
+            width: 100% !important;
           }
           .header-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #000000;
-            margin: 0 0 2px 0;
-            text-align: center;
-            line-height: 1.2;
+            font-size: 17px !important;
+            font-weight: bold !important;
+            color: #000000 !important;
+            margin: 0 0 2px 0 !important;
+            text-align: center !important;
+            line-height: 1.2 !important;
           }
           .header-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000000;
-            margin: 0 0 3px 0;
-            text-align: center;
+            font-size: 13px !important;
+            font-weight: bold !important;
+            color: #000000 !important;
+            margin: 0 0 3px 0 !important;
+            text-align: center !important;
           }
           .header-contact {
-            font-size: 11px;
-            color: #000000;
-            margin: 2px 0;
-            text-align: center;
+            font-size: 11.5px !important;
+            color: #000000 !important;
+            margin: 2px 0 !important;
+            text-align: center !important;
           }
           .header-links {
-            font-size: 11px;
-            color: #000000;
-            margin: 2px 0;
-            text-align: center;
+            font-size: 11.5px !important;
+            color: #000000 !important;
+            margin: 2px 0 !important;
+            text-align: center !important;
           }
           .section-title {
-            font-weight: bold;
-            font-size: 12px;
-            color: #000000;
-            margin-top: 13px;
-            margin-bottom: 3px;
-            text-align: left;
+            font-weight: bold !important;
+            font-size: 12.5px !important;
+            color: #000000 !important;
+            margin-top: 13px !important;
+            margin-bottom: 3px !important;
+            text-align: left !important;
           }
           a {
             color: #000000 !important;
@@ -115,8 +118,8 @@ export function generateCvHtml(data) {
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 1.5px !important;
-            line-height: 1.38 !important;
+            margin-bottom: 2px !important;
+            line-height: 1.4 !important;
           }
           p {
             margin: 0 !important;
@@ -142,7 +145,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.42;">
+            <p style="text-align: justify; line-height: 1.45;">
               ${objectiveHtml}
             </p>
           </div>
@@ -329,6 +332,8 @@ export function printCvDocument(cvDataOrElementId) {
               print-color-adjust: exact !important;
             }
             html, body {
+              width: 100% !important;
+              height: 100% !important;
               margin: 0 !important;
               padding: 0 !important;
               background: #ffffff !important;
@@ -338,12 +343,14 @@ export function printCvDocument(cvDataOrElementId) {
             }
             .text-center { text-align: center !important; }
             .cv-paper {
-              width: 210mm !important;
+              width: 100% !important;
               box-sizing: border-box !important;
-              padding: 16mm 18mm !important;
+              padding: 14mm 16mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
+              font-size: 11.5px !important;
+              line-height: 1.45 !important;
             }
           </style>
         </head>
@@ -356,18 +363,21 @@ export function printCvDocument(cvDataOrElementId) {
     `;
   }
 
-  // Look for existing print iframe or create a new one
+  // Look for existing print iframe or create a new one with full standard A4 width
   let iframe = document.getElementById("cv-hidden-print-iframe");
   if (!iframe) {
     iframe = document.createElement("iframe");
     iframe.id = "cv-hidden-print-iframe";
     iframe.style.position = "fixed";
-    iframe.style.right = "0";
-    iframe.style.bottom = "0";
-    iframe.style.width = "0";
-    iframe.style.height = "0";
+    iframe.style.left = "-9999px";
+    iframe.style.top = "0";
+    iframe.style.width = "210mm";
+    iframe.style.height = "297mm";
     iframe.style.border = "none";
     document.body.appendChild(iframe);
+  } else {
+    iframe.style.width = "210mm";
+    iframe.style.height = "297mm";
   }
 
   const doc = iframe.contentWindow.document;
@@ -375,9 +385,9 @@ export function printCvDocument(cvDataOrElementId) {
   doc.write(htmlContent);
   doc.close();
 
-  // Give the browser 250ms to parse and layout before printing
+  // Give the browser 300ms to parse and layout before printing
   setTimeout(() => {
     iframe.contentWindow.focus();
     iframe.contentWindow.print();
-  }, 250);
+  }, 300);
 }
