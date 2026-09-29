@@ -1,6 +1,7 @@
 /**
  * Utility to reliably print the CV document in pure A4 format
- * without any dashboard layout interference, clipping, or dark backgrounds.
+ * without any dashboard layout interference, clipping, dark backgrounds,
+ * or unwanted browser headers/footers (date, URL, page number).
  */
 export function printCvDocument(elementId = "printable-cv-area") {
   const printElement = document.getElementById(elementId);
@@ -30,11 +31,12 @@ export function printCvDocument(elementId = "printable-cv-area") {
     <html lang="en">
       <head>
         <meta charset="utf-8" />
-        <title>Md Antor Mia - CV</title>
+        <title></title>
         <style>
+          /* Setting page margin to 0 hides browser headers (date/time) and footers (URL/page numbers) */
           @page {
             size: A4 portrait;
-            margin: 12mm 16mm;
+            margin: 0 !important;
           }
           *, *::before, *::after {
             box-sizing: border-box;
@@ -47,30 +49,37 @@ export function printCvDocument(elementId = "printable-cv-area") {
             background: #ffffff !important;
             color: #000000 !important;
             font-family: Arial, Helvetica, sans-serif !important;
-            font-size: 11.5px;
-            line-height: 1.45;
+            font-size: 11px !important;
+            line-height: 1.4 !important;
+            -webkit-font-smoothing: antialiased;
+          }
+          .text-center {
+            text-align: center !important;
+          }
+          .text-center * {
+            text-align: center !important;
           }
           a {
             color: #000000 !important;
             text-decoration: underline !important;
           }
           ul {
-            margin: 2px 0 3px 0 !important;
+            margin: 0 !important;
             padding-left: 20px !important;
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 2px !important;
+            margin-bottom: 1.5px !important;
             line-height: 1.35 !important;
           }
           p {
-            margin: 2px 0 !important;
+            margin: 0 !important;
           }
           .cv-paper {
             width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
+            max-width: 210mm !important;
+            padding: 12mm 16mm !important;
+            margin: 0 auto !important;
             box-shadow: none !important;
             border: none !important;
             background: #ffffff !important;
@@ -79,15 +88,13 @@ export function printCvDocument(elementId = "printable-cv-area") {
         </style>
       </head>
       <body>
-        <div class="cv-paper">
-          ${printElement.innerHTML}
-        </div>
+        ${printElement.outerHTML}
       </body>
     </html>
   `);
   doc.close();
 
-  // Give the browser time to layout before calling print
+  // Give the browser 250ms to parse and layout before printing
   setTimeout(() => {
     iframe.contentWindow.focus();
     iframe.contentWindow.print();

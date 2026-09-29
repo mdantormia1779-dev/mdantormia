@@ -19,28 +19,38 @@ export default function CvTemplate({ data, printableRef }) {
     <div
       ref={printableRef}
       id="printable-cv-area"
-      className="cv-paper bg-white text-black shadow-2xl mx-auto"
+      className="cv-paper"
       style={{
         width: "100%",
         maxWidth: "210mm",
         boxSizing: "border-box",
-        padding: "14mm 16mm",
+        padding: "12mm 16mm",
         fontFamily: "Arial, Helvetica, sans-serif",
         fontSize: "11px",
         lineHeight: "1.4",
         color: "#000000",
         backgroundColor: "#ffffff",
+        margin: "0 auto",
       }}
     >
-      {/* HEADER SECTION */}
-      <div className="text-center mb-3">
+      {/* HEADER SECTION (ALWAYS CENTERED) */}
+      <div
+        className="text-center"
+        style={{
+          textAlign: "center",
+          width: "100%",
+          margin: "0 auto 10px auto",
+        }}
+      >
         <h1
           style={{
             fontSize: "16px",
             fontWeight: "bold",
             color: "#000000",
             margin: "0 0 2px 0",
+            textAlign: "center",
             lineHeight: "1.2",
+            fontFamily: "Arial, Helvetica, sans-serif",
           }}
         >
           {personalInfo.fullName || "Md Antor Mia"}
@@ -51,13 +61,23 @@ export default function CvTemplate({ data, printableRef }) {
             fontWeight: "bold",
             color: "#000000",
             margin: "0 0 3px 0",
+            textAlign: "center",
+            fontFamily: "Arial, Helvetica, sans-serif",
           }}
         >
           {personalInfo.title || "MERN Stack Developer"}
         </div>
 
         {/* Contact info line: +8801318964063 | mdantormia1779@gmail.com| Rangpur,Bangladesh */}
-        <div style={{ fontSize: "11px", color: "#000000", margin: "2px 0" }}>
+        <div
+          style={{
+            fontSize: "11px",
+            color: "#000000",
+            margin: "2px 0",
+            textAlign: "center",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
           <span>{personalInfo.phone || "+8801318964063"}</span>
           <span> | </span>
           <a
@@ -72,7 +92,15 @@ export default function CvTemplate({ data, printableRef }) {
         </div>
 
         {/* Links line: GitHub | Portfolio | Linkedin (underlined text, no icons) */}
-        <div style={{ fontSize: "11px", color: "#000000", margin: "2px 0" }}>
+        <div
+          style={{
+            fontSize: "11px",
+            color: "#000000",
+            margin: "2px 0",
+            textAlign: "center",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
           {personalInfo.github ? (
             <a
               href={personalInfo.github}
@@ -115,7 +143,7 @@ export default function CvTemplate({ data, printableRef }) {
       </div>
 
       {/* CAREER OBJECTIVE */}
-      <div style={{ marginBottom: "11px" }}>
+      <div style={{ marginBottom: "10px", textAlign: "left" }}>
         <div
           style={{
             fontWeight: "bold",
@@ -147,7 +175,7 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROFESSIONAL EXPERIENCE */}
       {experiences && experiences.length > 0 && (
-        <div style={{ marginBottom: "11px" }}>
+        <div style={{ marginBottom: "10px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
@@ -174,7 +202,7 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* TECHNICAL SKILL */}
       {skills && (
-        <div style={{ marginBottom: "11px" }}>
+        <div style={{ marginBottom: "10px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
@@ -225,7 +253,7 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* PROJECTS */}
       {projects && projects.length > 0 && (
-        <div style={{ marginBottom: "11px" }}>
+        <div style={{ marginBottom: "10px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
@@ -302,7 +330,7 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* EDUCATION */}
       {education && education.length > 0 && (
-        <div style={{ marginBottom: "11px" }}>
+        <div style={{ marginBottom: "10px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
@@ -327,7 +355,7 @@ export default function CvTemplate({ data, printableRef }) {
 
       {/* LANGUAGE */}
       {languages && languages.length > 0 && (
-        <div style={{ marginBottom: "4px" }}>
+        <div style={{ marginBottom: "2px", textAlign: "left" }}>
           <div
             style={{
               fontWeight: "bold",
