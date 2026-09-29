@@ -1,7 +1,7 @@
 /**
  * Generates clean, standalone A4 HTML representing the CV
- * with exact typography, full-width layout, and font sizes tailored
- * to fill the A4 page height matching the reference image.
+ * with exact typography, full-width layout, and font sizes carefully balanced
+ * to fit strictly within 1 single A4 page with no second page spill.
  */
 export function generateCvHtml(data) {
   const p = data?.personalInfo || {};
@@ -57,56 +57,59 @@ export function generateCvHtml(data) {
             color: #000000 !important;
             font-family: Arial, Helvetica, sans-serif !important;
             -webkit-font-smoothing: antialiased;
+            overflow: hidden !important;
           }
           .cv-container {
             width: 100% !important;
-            min-height: 100% !important;
+            max-width: 210mm !important;
             box-sizing: border-box !important;
-            padding: 16mm 20mm 14mm 20mm !important;
+            padding: 12mm 18mm 10mm 18mm !important;
             margin: 0 auto !important;
             background: #ffffff !important;
             color: #000000 !important;
-            font-size: 14px !important;
-            line-height: 1.52 !important;
+            font-size: 12.2px !important;
+            line-height: 1.42 !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 16px !important;
+            margin-bottom: 11px !important;
             width: 100% !important;
           }
           .header-name {
-            font-size: 22px !important;
+            font-size: 19px !important;
             font-weight: bold !important;
             color: #000000 !important;
-            margin: 0 0 3px 0 !important;
+            margin: 0 0 2px 0 !important;
             text-align: center !important;
             line-height: 1.2 !important;
           }
           .header-title {
-            font-size: 15.5px !important;
+            font-size: 13.5px !important;
             font-weight: bold !important;
             color: #000000 !important;
-            margin: 0 0 4px 0 !important;
+            margin: 0 0 3px 0 !important;
             text-align: center !important;
           }
           .header-contact {
-            font-size: 13.5px !important;
+            font-size: 12px !important;
             color: #000000 !important;
-            margin: 3px 0 !important;
+            margin: 2px 0 !important;
             text-align: center !important;
           }
           .header-links {
-            font-size: 13.5px !important;
+            font-size: 12px !important;
             color: #000000 !important;
-            margin: 3px 0 !important;
+            margin: 2px 0 !important;
             text-align: center !important;
           }
           .section-title {
             font-weight: bold !important;
-            font-size: 15px !important;
+            font-size: 13.5px !important;
             color: #000000 !important;
-            margin-top: 18px !important;
-            margin-bottom: 4px !important;
+            margin-top: 11px !important;
+            margin-bottom: 3px !important;
             text-align: left !important;
           }
           a {
@@ -114,13 +117,13 @@ export function generateCvHtml(data) {
             text-decoration: underline !important;
           }
           ul {
-            margin: 3px 0 !important;
-            padding-left: 22px !important;
+            margin: 2px 0 !important;
+            padding-left: 20px !important;
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 3px !important;
-            line-height: 1.48 !important;
+            margin-bottom: 1.5px !important;
+            line-height: 1.38 !important;
           }
           p {
             margin: 0 !important;
@@ -146,7 +149,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.52;">
+            <p style="text-align: justify; line-height: 1.42;">
               ${objectiveHtml}
             </p>
           </div>
@@ -157,11 +160,11 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Professional Experience</div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 5px;">
                 ${experiences
                   .map(
                     (exp) => `
-                  <p style="line-height: 1.5;">
+                  <p style="line-height: 1.4;">
                     <strong>${exp.role}${
                       exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""
                     }</strong>${exp.description ? ` — ${exp.description}` : ""}
@@ -204,7 +207,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Projects:</div>
-              <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
                 ${projects
                   .map(
                     (proj) => `
@@ -225,7 +228,7 @@ export function generateCvHtml(data) {
                     ${
                       proj.technologies
                         ? `
-                      <div style="margin: 2px 0;">
+                      <div style="margin: 1px 0;">
                         <strong>Technologies:</strong> ${proj.technologies}
                       </div>
                     `
@@ -344,12 +347,12 @@ export function printCvDocument(cvDataOrElementId) {
             .cv-paper {
               width: 100% !important;
               box-sizing: border-box !important;
-              padding: 16mm 20mm 14mm 20mm !important;
+              padding: 12mm 18mm 10mm 18mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
-              font-size: 14px !important;
-              line-height: 1.52 !important;
+              font-size: 12.2px !important;
+              line-height: 1.42 !important;
             }
           </style>
         </head>
