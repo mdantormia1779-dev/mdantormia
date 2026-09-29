@@ -1,6 +1,7 @@
 /**
  * Generates clean, standalone A4 HTML representing the CV
- * with larger, balanced font sizes and line heights to fill the page properly.
+ * with exact typography, full-width layout, and font sizes tailored
+ * to fill the A4 page height matching the reference image.
  */
 export function generateCvHtml(data) {
   const p = data?.personalInfo || {};
@@ -61,20 +62,20 @@ export function generateCvHtml(data) {
             width: 100% !important;
             min-height: 100% !important;
             box-sizing: border-box !important;
-            padding: 16mm 18mm !important;
+            padding: 16mm 20mm 14mm 20mm !important;
             margin: 0 auto !important;
             background: #ffffff !important;
             color: #000000 !important;
-            font-size: 13px !important;
-            line-height: 1.5 !important;
+            font-size: 14px !important;
+            line-height: 1.52 !important;
           }
           .header-center {
             text-align: center !important;
-            margin-bottom: 14px !important;
+            margin-bottom: 16px !important;
             width: 100% !important;
           }
           .header-name {
-            font-size: 20px !important;
+            font-size: 22px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 3px 0 !important;
@@ -82,29 +83,29 @@ export function generateCvHtml(data) {
             line-height: 1.2 !important;
           }
           .header-title {
-            font-size: 14.5px !important;
+            font-size: 15.5px !important;
             font-weight: bold !important;
             color: #000000 !important;
             margin: 0 0 4px 0 !important;
             text-align: center !important;
           }
           .header-contact {
-            font-size: 12.5px !important;
+            font-size: 13.5px !important;
             color: #000000 !important;
             margin: 3px 0 !important;
             text-align: center !important;
           }
           .header-links {
-            font-size: 12.5px !important;
+            font-size: 13.5px !important;
             color: #000000 !important;
             margin: 3px 0 !important;
             text-align: center !important;
           }
           .section-title {
             font-weight: bold !important;
-            font-size: 14px !important;
+            font-size: 15px !important;
             color: #000000 !important;
-            margin-top: 15px !important;
+            margin-top: 18px !important;
             margin-bottom: 4px !important;
             text-align: left !important;
           }
@@ -113,13 +114,13 @@ export function generateCvHtml(data) {
             text-decoration: underline !important;
           }
           ul {
-            margin: 2px 0 !important;
+            margin: 3px 0 !important;
             padding-left: 22px !important;
             list-style-type: disc !important;
           }
           li {
-            margin-bottom: 2.5px !important;
-            line-height: 1.45 !important;
+            margin-bottom: 3px !important;
+            line-height: 1.48 !important;
           }
           p {
             margin: 0 !important;
@@ -145,7 +146,7 @@ export function generateCvHtml(data) {
           <!-- CAREER OBJECTIVE -->
           <div>
             <div class="section-title" style="margin-top: 0;">Career Objective</div>
-            <p style="text-align: justify; line-height: 1.48;">
+            <p style="text-align: justify; line-height: 1.52;">
               ${objectiveHtml}
             </p>
           </div>
@@ -156,11 +157,11 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Professional Experience</div>
-              <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
                 ${experiences
                   .map(
                     (exp) => `
-                  <p style="line-height: 1.45;">
+                  <p style="line-height: 1.5;">
                     <strong>${exp.role}${
                       exp.typeOrCompany ? ` | ${exp.typeOrCompany}` : ""
                     }</strong>${exp.description ? ` — ${exp.description}` : ""}
@@ -203,7 +204,7 @@ export function generateCvHtml(data) {
               ? `
             <div>
               <div class="section-title">Projects:</div>
-              <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
                 ${projects
                   .map(
                     (proj) => `
@@ -343,12 +344,12 @@ export function printCvDocument(cvDataOrElementId) {
             .cv-paper {
               width: 100% !important;
               box-sizing: border-box !important;
-              padding: 16mm 18mm !important;
+              padding: 16mm 20mm 14mm 20mm !important;
               margin: 0 auto !important;
               background: #ffffff !important;
               color: #000000 !important;
-              font-size: 13px !important;
-              line-height: 1.5 !important;
+              font-size: 14px !important;
+              line-height: 1.52 !important;
             }
           </style>
         </head>
