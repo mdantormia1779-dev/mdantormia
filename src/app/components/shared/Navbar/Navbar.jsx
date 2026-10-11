@@ -15,7 +15,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 30) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -29,8 +29,8 @@ const Navbar = () => {
     if (mobileOpen && mobileMenuRef.current) {
       gsap.fromTo(
         mobileMenuRef.current,
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+        { opacity: 0, y: -15, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: "power2.out" }
       );
     }
   }, [mobileOpen]);
@@ -52,128 +52,131 @@ const Navbar = () => {
   ];
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#030712]/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/30 py-3"
-          : "bg-transparent border-b border-white/5 py-4"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* LOGO */}
-        <Link
-          href="/"
-          className="group flex items-center gap-2 text-2xl font-black tracking-tight"
-        >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[2px] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3 shadow-lg shadow-indigo-500/25">
-            <div className="w-full h-full bg-[#030712] rounded-[10px] flex items-center justify-center font-extrabold text-white text-lg">
-              A
-            </div>
-          </div>
-          <span className="text-white font-extrabold text-xl">
-            Antor<span className="text-cyan-400">.</span>
-          </span>
-        </Link>
-
-        {/* DESKTOP NAV LINKS */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-md">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-white bg-indigo-500/20 border border-indigo-500/40 shadow-sm shadow-indigo-500/20"
-                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                {link.name}
-                {isActive && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-[0_0_8px_#38bdf8]" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* RIGHT ACTIONS */}
-        <div className="hidden sm:flex items-center gap-3">
+    <header className="sticky top-0 z-50 pt-3 pb-2 px-4 sm:px-6 lg:px-8 transition-all duration-300">
+      <div
+        className={`container mx-auto transition-all duration-300 rounded-2xl ${
+          scrolled
+            ? "bg-[#07192d]/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-950/60 px-4 sm:px-6 py-2.5"
+            : "bg-[#07192d]/50 backdrop-blur-md border border-cyan-500/15 px-4 sm:px-6 py-3"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          {/* LOGO BRANDING */}
           <Link
-            href="/contact"
-            className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center gap-1.5"
+            href="/"
+            className="group flex items-center gap-2.5 text-2xl font-black tracking-tight"
           >
-            <FiSend className="text-cyan-400" /> Hire Me
-          </Link>
-          <button
-            onClick={handleDownload}
-            className="group relative px-5 py-2.5 rounded-xl font-semibold text-sm text-white overflow-hidden shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40 active:scale-95"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 transition-all duration-300 group-hover:opacity-90" />
-            <span className="relative flex items-center gap-2">
-              <FaDownload className="text-xs transition-transform group-hover:-translate-y-0.5" />
-              Download CV
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-cyan-400 via-sky-300 to-indigo-500 p-[2px] transition-transform duration-300 group-hover:rotate-6 shadow-md shadow-cyan-500/20">
+              <div className="w-full h-full bg-[#07192d] rounded-[10px] flex items-center justify-center font-black text-white text-lg sm:text-xl">
+                A
+              </div>
+            </div>
+            <span className="text-white font-extrabold text-xl sm:text-2xl tracking-wide">
+              Antor<span className="text-cyan-400 animate-pulse">.</span>
             </span>
-          </button>
-        </div>
+          </Link>
 
-        {/* MOBILE MENU TOGGLE */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-200 hover:text-white focus:outline-none transition-colors"
-          aria-label="Toggle Navigation"
-        >
-          {mobileOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
-        </button>
-      </div>
-
-      {/* MOBILE MENU DROPDOWN */}
-      {mobileOpen && (
-        <div
-          ref={mobileMenuRef}
-          className="md:hidden mt-2 mx-4 p-5 rounded-2xl bg-[#0b1120]/95 backdrop-blur-2xl border border-white/10 shadow-2xl space-y-4"
-        >
-          <nav className="flex flex-col space-y-2">
+          {/* DESKTOP NAV LINKS (CENTER PILL) */}
+          <nav className="hidden md:flex items-center gap-1 bg-[#07192d]/80 border border-cyan-500/20 rounded-xl p-1.5 backdrop-blur-md shadow-inner">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`relative px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                     isActive
-                      ? "bg-indigo-500/20 text-cyan-300 border border-indigo-500/30"
-                      : "text-gray-300 hover:bg-white/5 hover:text-white"
+                      ? "text-cyan-300 bg-cyan-500/20 border border-cyan-500/40 font-semibold shadow-sm shadow-cyan-500/20"
+                      : "text-slate-300 hover:text-white hover:bg-cyan-500/10"
                   }`}
                 >
                   {link.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-cyan-400 rounded-full shadow-[0_0_8px_#38bdf8]" />
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                handleDownload();
-                setMobileOpen(false);
-              }}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
-            >
-              <FaDownload /> Download CV
-            </button>
+          {/* RIGHT ACTION BUTTONS */}
+          <div className="hidden sm:flex items-center gap-3">
             <Link
               href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="w-full py-3 rounded-xl border border-indigo-400/40 text-center text-sm font-medium text-indigo-300 hover:bg-indigo-500/10 transition"
+              className="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-cyan-300 transition-colors flex items-center gap-1.5 rounded-xl hover:bg-cyan-950/40 border border-transparent hover:border-cyan-500/20"
             >
-              Hire Me
+              <FiSend className="text-cyan-400" /> Hire Me
             </Link>
+
+            <button
+              onClick={handleDownload}
+              className="group relative px-5 py-2 rounded-xl font-semibold text-sm text-white overflow-hidden shadow-lg shadow-cyan-950/50 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-600 transition-all duration-300 group-hover:opacity-95" />
+              <span className="relative flex items-center gap-2">
+                <FaDownload className="text-xs transition-transform group-hover:-translate-y-0.5" />
+                Download CV
+              </span>
+            </button>
           </div>
+
+          {/* MOBILE MENU TOGGLE */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2.5 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-slate-200 hover:text-white focus:outline-none transition-colors"
+            aria-label="Toggle Navigation"
+          >
+            {mobileOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+          </button>
         </div>
-      )}
+
+        {/* MOBILE MENU DROPDOWN */}
+        {mobileOpen && (
+          <div
+            ref={mobileMenuRef}
+            className="md:hidden mt-3 p-4 rounded-xl bg-[#07192d]/98 backdrop-blur-2xl border border-cyan-500/30 shadow-2xl space-y-3"
+          >
+            <nav className="flex flex-col space-y-1.5">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                      isActive
+                        ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold"
+                        : "text-slate-300 hover:bg-cyan-950/50 hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="pt-2 border-t border-cyan-500/20 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  handleDownload();
+                  setMobileOpen(false);
+                }}
+                className="w-full py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-600 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-900/40 active:scale-95 transition-transform"
+              >
+                <FaDownload /> Download CV
+              </button>
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="w-full py-2.5 rounded-lg border border-cyan-500/30 text-center text-sm font-medium text-cyan-300 hover:bg-cyan-950/50 transition flex items-center justify-center gap-2"
+              >
+                <FiSend className="text-cyan-400" /> Hire Me
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 };

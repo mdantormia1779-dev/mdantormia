@@ -1,7 +1,17 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { FaPhoneAlt, FaUser, FaCheck, FaCopy, FaDownload, FaArrowRight, FaCode, FaRocket } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaUser,
+  FaCheck,
+  FaCopy,
+  FaDownload,
+  FaArrowRight,
+  FaCode,
+  FaBriefcase,
+  FaGraduationCap,
+} from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail, MdWork } from "react-icons/md";
 import Link from "next/link";
@@ -44,53 +54,65 @@ const About = () => {
   };
 
   const highlights = [
-    "Clean, modular & reusable React / Next.js code",
-    "Modern UI/UX implementation with Tailwind CSS & GSAP",
-    "RESTful API design and database modeling with MongoDB",
-    "Performance optimization & responsive mobile-first layouts",
+    "Expert in React.js, Next.js, TypeScript & Tailwind CSS UI design",
+    "Full-Stack Development with Node.js, Prisma ORM, MongoDB & PostgreSQL",
+    "AI Face Recognition, Liveness Verification & GPS Geofencing implementations",
+    "E-Commerce solutions with Redux Toolkit, GSAP animations & Payment integration",
   ];
 
   return (
-    <section ref={containerRef} className="py-14 sm:py-16 text-white relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-16">
-        
+    <section
+      ref={containerRef}
+      className="pb-6 sm:pt-6 sm:pb-6 text-white relative bg-[#07192d]"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-cyan-500/20 pb-16">
         {/* SECTION HEADER */}
-        <div className="about-reveal text-center md:text-left mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-2.5">
-            <FaUser className="text-xs" />
+        <div className="about-reveal text-center md:text-left mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2.5 backdrop-blur-md">
+            <FaUser className="text-xs text-cyan-400" />
             Discover My Story
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
-            About <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">Me</span>
+            About{" "}
+            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
+              Me
+            </span>
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mt-1.5">
-            Passionate frontend engineer turning real-world business challenges into seamless web applications.
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mt-1.5 font-normal">
+            Motivated MERN Stack & Full-Stack Developer turning complex business challenges into scalable, performant, and responsive web & mobile applications.
           </p>
         </div>
 
         {/* BENTO GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
-          {/* LEFT BENTO: DETAILED BIO */}
-          <div className="about-reveal lg:col-span-7 bg-[#0b1120]/75 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          {/* LEFT BENTO: DETAILED BIO & HIGHLIGHTS */}
+          <div className="about-reveal lg:col-span-7 bg-[#091d34]/80 backdrop-blur-xl border border-cyan-500/30 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl shadow-cyan-950/50 relative overflow-hidden">
             <div className="space-y-5 relative z-10">
-              <div className="flex items-center gap-2.5 text-cyan-400 font-semibold text-base sm:text-lg">
-                <h3>Frontend Developer & Digital Creator</h3>
+              <div className="flex items-center gap-2.5 text-cyan-300 font-semibold text-base sm:text-lg">
+                <FaBriefcase className="text-cyan-400" />
+                <h3>Full-Stack & MERN Stack Developer</h3>
               </div>
 
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                Hi, I am <span className="text-white font-bold">Md Antor Mia</span>. I specialize in building modern, high-performance web applications using <span className="text-cyan-300 font-semibold">React</span>, <span className="text-indigo-300 font-semibold">Next.js</span>, <span className="text-white font-semibold">Tailwind CSS</span>, and modern JavaScript.
+              <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+                Hi, I am <span className="text-white font-bold">Md Antor Mia</span>. I specialize in building modern, scalable web and mobile applications using{" "}
+                <span className="text-cyan-300 font-semibold">React.js</span>,{" "}
+                <span className="text-sky-300 font-semibold">Next.js</span>,{" "}
+                <span className="text-indigo-300 font-semibold">TypeScript</span>,{" "}
+                <span className="text-emerald-300 font-semibold">Node.js</span>, and modern database tools like Prisma, PostgreSQL, and MongoDB.
               </p>
 
-              <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                Whether creating interactive dashboards, responsive landing pages, or full-stack web platforms, I focus on delivering clean code, intuitive UI/UX design, and smooth animations that keep users engaged.
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                I have hands-on experience as a <span className="text-cyan-200 font-medium">Frontend Developer Intern</span> building responsive dashboards, as well as developing complex projects like an AI-powered Smart Attendance System (with GPS Geofencing) and Full-Stack E-Commerce platforms.
               </p>
 
               {/* HIGHLIGHT BULLETS */}
               <div className="pt-1 space-y-2">
                 {highlights.map((point, index) => (
-                  <div key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-300">
-                    <span className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 shrink-0">
+                  <div
+                    key={index}
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300"
+                  >
+                    <span className="p-1 rounded-full bg-emerald-500/20 text-emerald-400 mt-0.5 shrink-0 border border-emerald-500/30">
                       <FaCheck className="text-[10px]" />
                     </span>
                     <span>{point}</span>
@@ -100,7 +122,7 @@ const About = () => {
             </div>
 
             {/* ACTION FOOTER */}
-            <div className="pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
+            <div className="pt-6 mt-6 border-t border-cyan-500/20 flex flex-wrap items-center justify-between gap-4 relative z-10">
               <Link
                 href="/about"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors group/link"
@@ -110,30 +132,31 @@ const About = () => {
               </Link>
 
               <a
-                href="/antor.pdf"
+                href="/api/cv/download"
                 download
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs sm:text-sm font-medium transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-500/30 text-white text-xs sm:text-sm font-medium transition-all shadow-md active:scale-95"
               >
-                <FaDownload className="text-xs text-indigo-400" />
+                <FaDownload className="text-xs text-cyan-400" />
                 Download CV
               </a>
             </div>
           </div>
 
           {/* RIGHT BENTO: QUICK INFO & CONTACT CARD */}
-          <div className="about-reveal lg:col-span-5 bg-[#0b1120]/75 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          <div className="about-reveal lg:col-span-5 bg-[#091d34]/80 backdrop-blur-xl border border-cyan-500/30 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl shadow-cyan-950/50 relative overflow-hidden">
             <div className="space-y-4">
-              <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2 pb-2 border-b border-white/10">
-                <FaCode className="text-indigo-400" /> Quick Details
+              <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2 pb-2 border-b border-cyan-500/20">
+                <FaCode className="text-cyan-400" /> Personal Overview
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {[
                   { icon: FaUser, label: "Name", value: "Md Antor Mia", copyable: false },
                   { icon: MdEmail, label: "Email", value: "mdantormia1779@gmail.com", copyable: true },
-                  { icon: FaPhoneAlt, label: "Phone", value: "01318964063", copyable: true },
-                  { icon: FaLocationDot, label: "Location", value: "Gaibandha, Bangladesh", copyable: false },
-                  { icon: MdWork, label: "Experience", value: "Intern @ JEVXO Software", copyable: false },
+                  { icon: FaPhoneAlt, label: "Phone", value: "+8801318964063", copyable: true },
+                  { icon: FaLocationDot, label: "Location", value: "Rangpur, Bangladesh", copyable: false },
+                  { icon: MdWork, label: "Experience", value: "Frontend Intern @ JEVXO Software", copyable: false },
+                  { icon: FaGraduationCap, label: "Education", value: "Diploma in CST (Habiganj Poly.)", copyable: false },
                 ].map((item, idx) => {
                   const Icon = item.icon;
                   const isCopied = copiedKey === item.label;
@@ -141,14 +164,14 @@ const About = () => {
                   return (
                     <div
                       key={idx}
-                      className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition-all flex items-center justify-between gap-3 group"
+                      className="p-2.5 rounded-2xl bg-cyan-950/30 border border-cyan-500/15 hover:border-cyan-500/40 transition-all flex items-center justify-between gap-3 group"
                     >
                       <div className="flex items-center gap-3 overflow-hidden">
-                        <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
-                          <Icon size={15} />
+                        <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                          <Icon size={14} />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-[11px] text-gray-400 font-medium">{item.label}</p>
+                          <p className="text-[11px] text-slate-400 font-medium">{item.label}</p>
                           <p className="text-xs sm:text-sm font-semibold text-white truncate">{item.value}</p>
                         </div>
                       </div>
@@ -156,7 +179,7 @@ const About = () => {
                       {item.copyable && (
                         <button
                           onClick={() => handleCopy(item.value, item.label)}
-                          className="p-1.5 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-gray-400 hover:text-indigo-300 transition-colors shrink-0"
+                          className="p-1.5 rounded-lg bg-cyan-900/40 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-cyan-500/20 transition-colors shrink-0 cursor-pointer"
                           title="Copy to clipboard"
                         >
                           {isCopied ? <FaCheck className="text-emerald-400 text-xs" /> : <FaCopy className="text-xs" />}
@@ -169,15 +192,13 @@ const About = () => {
             </div>
 
             {/* STATUS CHIP */}
-            <div className="mt-5 p-3 rounded-xl bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 border border-indigo-500/20 text-center">
-              <p className="text-xs text-indigo-300 font-medium">
-                 Actively seeking frontend and full-stack software roles
+            <div className="mt-4 p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-center backdrop-blur-md">
+              <p className="text-xs text-cyan-200 font-medium">
+                Seeking Full-Stack / MERN Stack Opportunities
               </p>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

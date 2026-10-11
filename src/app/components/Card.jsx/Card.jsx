@@ -129,32 +129,32 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
       {displayData.map((project, index) => (
         <div
           key={project.id || project._id || index}
-          className="project-card group bg-[#0b1120]/75 backdrop-blur-xl border border-white/10 hover:border-indigo-500/40 rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between"
+          className="project-card group bg-[#091d34]/80 backdrop-blur-xl border border-cyan-500/30 hover:border-cyan-400/60 rounded-3xl overflow-hidden shadow-xl shadow-cyan-950/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-950/80 flex flex-col justify-between"
         >
           <div>
             {/* PROJECT PREVIEW IMAGE */}
-            <div className="relative h-52 w-full overflow-hidden bg-gray-900">
+            <div className="relative h-52 w-full overflow-hidden bg-[#07192d]">
               {project.image ? (
                 <Image
                   src={project.image}
                   alt={project.name || "Project"}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover object-top group-hover:scale-108 transition-transform duration-700 ease-out"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gray-900 text-gray-600">
+                <div className="w-full h-full flex items-center justify-center bg-[#07192d] text-slate-500">
                   <FaFolder size={48} />
                 </div>
               )}
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#091d34] via-transparent to-transparent opacity-80" />
 
               {/* Category Pill */}
               {project.category && (
                 <div className="absolute top-4 left-4">
-                  <span className="text-xs px-3 py-1 rounded-full bg-[#030712]/80 backdrop-blur-md text-cyan-300 border border-white/15 font-medium shadow-md">
+                  <span className="text-xs px-3 py-1 rounded-full bg-[#07192d]/90 backdrop-blur-md text-cyan-300 border border-cyan-500/30 font-medium shadow-md">
                     {project.category}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
                 {project.name}
               </h3>
 
-              <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">
+              <p className="text-slate-300 text-sm leading-relaxed line-clamp-3 mb-5 font-normal">
                 {project.description}
               </p>
 
@@ -176,7 +176,7 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
                 {project.tech?.map((t, idx) => (
                   <span
                     key={idx}
-                    className="text-xs px-2.5 py-1 rounded-lg bg-white/[0.04] text-gray-300 border border-white/5 group-hover:border-indigo-500/20 transition-colors font-medium"
+                    className="text-xs px-2.5 py-1 rounded-lg bg-cyan-950/50 text-slate-200 border border-cyan-500/20 group-hover:border-cyan-400/40 transition-colors font-medium"
                   >
                     {t}
                   </span>
@@ -186,19 +186,19 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
           </div>
 
           {/* ACTION BUTTONS FOOTER */}
-          <div className="p-6 pt-0 border-t border-white/5 mt-auto flex items-center justify-between gap-4">
+          <div className="p-6 pt-2 border-t border-cyan-500/20 mt-auto flex items-center justify-between gap-4">
             {project.github ? (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
               >
                 <FaGithub size={16} />
                 <span>Code</span>
               </a>
             ) : (
-              <span className="text-xs text-gray-500">Source Private</span>
+              <span className="text-xs text-slate-500">Source Private</span>
             )}
 
             {project.live && (
@@ -206,10 +206,10 @@ const Card = ({ projectData = [], limit, category = "All" }) => {
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 hover:text-white border border-indigo-500/30 text-sm font-semibold transition-all group/live shadow-sm"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-200 hover:text-white border border-cyan-500/30 text-sm font-semibold transition-all group/live shadow-sm backdrop-blur-md"
               >
                 <span>Live Demo</span>
-                <FiArrowUpRight className="text-base group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5 transition-transform" />
+                <FiArrowUpRight className="text-base text-cyan-400 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5 transition-transform" />
               </a>
             )}
           </div>

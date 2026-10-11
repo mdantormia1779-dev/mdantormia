@@ -73,35 +73,38 @@ const ProjectPage = () => {
   const categories = ["All", "Full Stack", "Frontend", "Next.js"];
 
   return (
-    <div ref={containerRef} className="py-12 md:py-20 text-white min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div ref={containerRef} className="py-12 md:py-20 text-white min-h-screen bg-[#07192d] relative overflow-hidden">
+      {/* Background Decorative Glow */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/10 blur-[150px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="project-page-header inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
-            <FaFolderOpen className="text-xs" />
+          <div className="project-page-header inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
+            <FaFolderOpen className="text-xs text-cyan-400" />
             Complete Portfolio
           </div>
           <h1 className="project-page-header text-3xl sm:text-5xl md:text-6xl font-black tracking-tight">
-            All Creative <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Projects</span>
+            All Creative <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Projects</span>
           </h1>
-          <p className="project-page-header text-gray-400 text-sm sm:text-base">
+          <p className="project-page-header text-slate-300 text-sm sm:text-base font-normal">
             Explore web applications, frontend architectures, client projects, and full-stack software.
           </p>
         </div>
 
         {/* SEARCH & FILTERS BAR */}
-        <div className="project-page-header mb-10 flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#0b1120]/80 backdrop-blur-xl border border-white/10 shadow-xl">
+        <div className="project-page-header mb-10 flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-3xl bg-[#091d34]/80 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-950/50">
           
           {/* SEARCH INPUT */}
           <div className="relative w-full md:w-80">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 text-sm" />
             <input
               type="text"
               placeholder="Search by name, tech (React, MongoDB)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#030712]/80 border border-white/10 rounded-xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+              className="w-full bg-[#07192d]/90 border border-cyan-500/30 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors"
             />
           </div>
 
@@ -113,8 +116,8 @@ const ProjectPage = () => {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-indigo-500 text-white shadow-md shadow-indigo-500/25"
-                    : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                    ? "bg-cyan-500 text-white shadow-lg shadow-cyan-950/60"
+                    : "bg-cyan-950/40 text-slate-300 hover:text-white hover:bg-cyan-900/50 border border-cyan-500/20"
                 }`}
               >
                 {cat}
@@ -130,10 +133,10 @@ const ProjectPage = () => {
             <Card projectData={filteredProjects} category="All" />
           </div>
         ) : (
-          <div className="text-center py-16 bg-[#0b1120]/40 rounded-3xl border border-white/5 p-8">
-            <FaFolderOpen className="text-4xl text-gray-600 mx-auto mb-3" />
-            <h3 className="text-lg font-bold text-gray-300 mb-1">No Projects Match Your Search</h3>
-            <p className="text-xs sm:text-sm text-gray-500 mb-5">
+          <div className="text-center py-16 bg-[#091d34]/60 rounded-3xl border border-cyan-500/20 p-8 backdrop-blur-xl">
+            <FaFolderOpen className="text-4xl text-cyan-400/60 mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-white mb-1">No Projects Match Your Search</h3>
+            <p className="text-xs sm:text-sm text-slate-300 mb-5">
               Try searching with different keywords or reset your filters.
             </p>
             <button
@@ -141,7 +144,7 @@ const ProjectPage = () => {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="px-4 py-2 rounded-xl bg-indigo-500 text-white text-xs sm:text-sm font-semibold"
+              className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-cyan-950/50 transition-all cursor-pointer"
             >
               Reset Filters
             </button>
@@ -149,17 +152,17 @@ const ProjectPage = () => {
         )}
 
         {/* CALL TO ACTION */}
-        <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-indigo-900/30 via-[#0b1120] to-cyan-900/30 border border-white/10 text-center space-y-3">
+        <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-cyan-950/60 via-[#091d34] to-indigo-950/60 border border-cyan-500/30 text-center space-y-3 shadow-2xl backdrop-blur-xl">
           <h3 className="text-xl sm:text-2xl font-extrabold text-white">
             Have a project in mind or need a custom build?
           </h3>
-          <p className="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto">
+          <p className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-normal">
             Let&apos;s team up to build an exceptional digital product that delivers real value.
           </p>
           <div className="pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-cyan-950/50 hover:scale-105 active:scale-95 transition-all"
             >
               <FiSend /> Get in Touch
             </Link>

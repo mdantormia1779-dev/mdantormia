@@ -65,20 +65,23 @@ const Project = () => {
   const categories = ["All", "Full Stack", "Frontend", "Next.js"];
 
   return (
-    <section ref={containerRef} className="py-14 sm:py-16 text-white relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-16">
+    <section ref={containerRef} className="py-6 sm:py-6 text-white relative bg-[#07192d] overflow-hidden">
+      {/* Background Decorative Glow */}
+      <div className="absolute top-1/2 -left-20 w-[400px] h-[400px] bg-cyan-600/10 blur-[140px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-cyan-500/20 pb-16 relative z-10">
         
         {/* HEADER & FILTER */}
         <div className="project-section-reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-2.5">
-              <FaFolderOpen className="text-xs" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2.5 backdrop-blur-md">
+              <FaFolderOpen className="text-xs text-cyan-400" />
               Featured Work
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
-              Recent <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Projects</span>
+              Recent <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Projects</span>
             </h2>
-            <p className="text-gray-400 text-sm sm:text-base max-w-xl mt-1.5">
+            <p className="text-slate-300 text-sm sm:text-base max-w-xl mt-1.5 font-normal">
               A curated collection of web applications, client portals, and open-source software experiments.
             </p>
           </div>
@@ -91,8 +94,8 @@ const Project = () => {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeCategory === cat
-                    ? "bg-indigo-500 text-white shadow-md shadow-indigo-500/30"
-                    : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                    ? "bg-cyan-500 text-white shadow-lg shadow-cyan-950/60"
+                    : "bg-cyan-950/40 text-slate-300 hover:text-white hover:bg-cyan-900/50 border border-cyan-500/20"
                 }`}
               >
                 {cat}
@@ -101,10 +104,10 @@ const Project = () => {
 
             <Link
               href="/project"
-              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs sm:text-sm font-semibold text-gray-300 hover:text-white transition-all ml-1 group"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-500/30 text-xs sm:text-sm font-semibold text-cyan-200 hover:text-white transition-all ml-1 group backdrop-blur-md"
             >
               <span>Explore All</span>
-              <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
+              <FaArrowRight className="text-xs text-cyan-400 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
@@ -118,7 +121,7 @@ const Project = () => {
         <div className="mt-10 text-center lg:hidden">
           <Link
             href="/project"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-md"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-600 text-white font-semibold text-sm shadow-lg shadow-cyan-950/50 active:scale-95 transition-transform"
           >
             <span>View All Projects</span>
             <FaArrowRight className="text-xs" />

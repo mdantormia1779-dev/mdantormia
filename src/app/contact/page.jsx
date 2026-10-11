@@ -95,29 +95,33 @@ const ContactPage = () => {
     {
       icon: FaMapMarkerAlt,
       label: "Location",
-      value: "Gaibandha, Bangladesh",
+      value: "Rangpur, Bangladesh",
       actionText: "Open Map",
       actionHref: "https://maps.google.com/?q=Gaibandha,Bangladesh",
     },
   ];
 
   return (
-    <div ref={containerRef} className="py-16 md:py-24 text-white min-h-screen relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+    <div ref={containerRef} className="py-16 md:py-24 text-white min-h-screen bg-[#07192d] relative overflow-hidden">
+      {/* Background Decorative Glow */}
+      <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-cyan-600/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-[450px] h-[450px] bg-indigo-600/10 blur-[150px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
         
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="contact-header inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
-            <FiSend className="text-xs" />
+          <div className="contact-header inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
+            <FiSend className="text-xs text-cyan-400" />
             Get in Touch
           </div>
           <h1 className="contact-header text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
             Let’s Build Something{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
               Extraordinary
             </span>
           </h1>
-          <p className="contact-header text-gray-400 text-base sm:text-lg">
+          <p className="contact-header text-slate-300 text-base sm:text-lg font-normal">
             Have a project in mind, seeking a developer for your team, or want to say hello? Send me a message!
           </p>
         </div>
@@ -126,9 +130,9 @@ const ContactPage = () => {
           
           {/* LEFT COLUMN: CONTACT DETAILS & SOCIALS */}
           <div className="contact-col lg:col-span-5 space-y-8">
-            <div className="bg-[#0b1120]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <div className="bg-[#091d34]/80 backdrop-blur-2xl border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/50 space-y-6">
               <h3 className="text-2xl font-bold text-white">Contact Information</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed font-normal">
                 I am actively available for frontend engineering, full stack web development roles, and freelance collaborations.
               </p>
 
@@ -140,22 +144,22 @@ const ContactPage = () => {
                   return (
                     <div
                       key={idx}
-                      className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition-all space-y-2 group"
+                      className="p-4 rounded-2xl bg-cyan-950/30 border border-cyan-500/15 hover:border-cyan-500/40 transition-all space-y-2 group"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
                             <Icon size={18} />
                           </div>
                           <div>
-                            <p className="text-xs text-gray-400 font-medium">{item.label}</p>
+                            <p className="text-xs text-slate-400 font-medium">{item.label}</p>
                             <p className="text-sm font-semibold text-white">{item.value}</p>
                           </div>
                         </div>
 
                         <button
                           onClick={() => handleCopy(item.value, item.label)}
-                          className="p-2 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-gray-400 hover:text-indigo-300 transition-colors"
+                          className="p-2 rounded-lg bg-cyan-900/40 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-cyan-500/20 transition-colors cursor-pointer"
                           title="Copy to clipboard"
                         >
                           {isCopied ? <FaCheck className="text-emerald-400 text-xs" /> : <FaCopy className="text-xs" />}
@@ -167,8 +171,8 @@ const ContactPage = () => {
               </div>
 
               {/* SOCIAL MEDIA */}
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-xs uppercase font-semibold text-gray-400 tracking-wider mb-3">
+              <div className="pt-4 border-t border-cyan-500/20">
+                <p className="text-xs uppercase font-semibold text-cyan-400 tracking-wider mb-3">
                   Follow & Connect
                 </p>
                 <div className="flex items-center gap-3">
@@ -177,19 +181,19 @@ const ContactPage = () => {
                       icon: FaGithub,
                       link: "https://github.com/mdantormia1779-dev",
                       label: "GitHub",
-                      color: "hover:border-white hover:text-white",
+                      color: "hover:border-cyan-400 hover:text-white hover:bg-cyan-950/80",
                     },
                     {
                       icon: FaLinkedin,
-                      link: "https://www.linkedin.com/in/md-antor-mia-antor/",
+                      link: "https://www.linkedin.com/in/mdantormia",
                       label: "LinkedIn",
-                      color: "hover:border-cyan-400 hover:text-cyan-400",
+                      color: "hover:border-sky-400 hover:text-sky-300 hover:bg-cyan-950/80",
                     },
                     {
                       icon: FaFacebook,
-                      link: "https://www.facebook.com/share/17QnUSneqa/",
+                      link: "https://www.facebook.com/md.antormia.1779",
                       label: "Facebook",
-                      color: "hover:border-indigo-400 hover:text-indigo-400",
+                      color: "hover:border-indigo-400 hover:text-indigo-300 hover:bg-cyan-950/80",
                     },
                   ].map((s, i) => {
                     const Icon = s.icon;
@@ -200,7 +204,7 @@ const ContactPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={s.label}
-                        className={`w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-gray-300 transition-all duration-300 hover:scale-110 ${s.color}`}
+                        className={`w-11 h-11 rounded-xl bg-cyan-950/40 border border-cyan-500/20 flex items-center justify-center text-slate-300 transition-all duration-300 hover:scale-110 ${s.color}`}
                       >
                         <Icon size={19} />
                       </a>
@@ -213,10 +217,10 @@ const ContactPage = () => {
 
           {/* RIGHT COLUMN: MODERN FORM */}
           <div className="contact-col lg:col-span-7">
-            <div className="bg-[#0b1120]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#091d34]/80 backdrop-blur-2xl border border-cyan-500/30 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-cyan-950/50 relative overflow-hidden">
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white">Send Me a Direct Message</h3>
-                <p className="text-gray-400 text-sm mt-1">
+                <p className="text-slate-300 text-sm mt-1 font-normal">
                   Fill out the form below and I will respond to you within 24 hours.
                 </p>
               </div>
@@ -224,7 +228,7 @@ const ContactPage = () => {
               <form ref={form} onSubmit={sendEmail} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-gray-300 ml-1">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-cyan-300 ml-1">
                       Your Name
                     </label>
                     <input
@@ -232,12 +236,12 @@ const ContactPage = () => {
                       type="text"
                       required
                       placeholder="e.g. Alex Johnson"
-                      className="w-full bg-[#030712]/90 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 transition-all"
+                      className="w-full bg-[#07192d]/90 border border-cyan-500/30 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 transition-all"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-gray-300 ml-1">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-cyan-300 ml-1">
                       Your Email
                     </label>
                     <input
@@ -245,13 +249,13 @@ const ContactPage = () => {
                       type="email"
                       required
                       placeholder="e.g. alex@company.com"
-                      className="w-full bg-[#030712]/90 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 transition-all"
+                      className="w-full bg-[#07192d]/90 border border-cyan-500/30 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-gray-300 ml-1">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-cyan-300 ml-1">
                     Subject
                   </label>
                   <input
@@ -259,12 +263,12 @@ const ContactPage = () => {
                     type="text"
                     required
                     placeholder="Project Inquiry / Job Opportunity"
-                    className="w-full bg-[#030712]/90 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 transition-all"
+                    className="w-full bg-[#07192d]/90 border border-cyan-500/30 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 transition-all"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-gray-300 ml-1">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-cyan-300 ml-1">
                     Your Message
                   </label>
                   <textarea
@@ -272,14 +276,14 @@ const ContactPage = () => {
                     rows={5}
                     required
                     placeholder="Tell me more about your project scope, timeline, and goals..."
-                    className="w-full bg-[#030712]/90 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 transition-all resize-none"
+                    className="w-full bg-[#07192d]/90 border border-cyan-500/30 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 transition-all resize-none"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-400 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-cyan-950/50 hover:shadow-cyan-950/80 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                 >
                   {isSending ? (
                     <span className="flex items-center gap-2">
